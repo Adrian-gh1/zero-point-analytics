@@ -1,0 +1,99 @@
+// Use DBML to define your database structure
+// Site: https://dbdiagram.io/d
+// Docs: https://dbml.dbdiagram.io/docs
+
+Table users {
+  id integer [primary key]
+  firstName varchar
+  lastName varchar
+  role varchar
+  username varchar
+  email varchar
+  hashedPassword varchar
+  created_at timestamp
+  updated_at timestamp
+}
+
+Table businesses {
+  id integer [primary key]
+  businessName varchar
+  businessAddress varchar
+  businessEmail varchar
+  businessWebsite varchar
+  businessDescription varchar
+  businessIndustry varchar
+  businessCategory varchar
+  created_at timestamp
+  updated_at timestamp
+}
+
+Table businessUsers {
+  businessId integer
+  userId integer
+  role varchar
+  created_at timestamp
+  updated_at timestamp
+}
+
+Table businessServices {
+  id integer [primary key]
+  businessId integer
+  serviceName varchar
+  serviceDescription varchar
+  serviceType varchar
+  serviceTags varchar
+  created_at timestamp
+  updated_at timestamp
+}
+
+Table businessConnections {
+  id integer [primary key]
+  businessId1 integer
+  businessId2 integer
+  connectionType varchar
+  connectionStatus varchar
+  connectionDescription varchar
+  created_at timestamp
+  updated_at timestamp
+}
+
+Table businessRequests {
+  id integer [primary key]
+  businessId integer
+  serviceId integer
+  requestType varchar
+  targetBusinessId integer
+  requestStatus varchar
+  requestMessage varchar
+  created_at timestamp
+  updated_at timestamp
+}
+
+Table businessContracts {
+  id integer [primary key]
+  businessId1 integer
+  businessId2 integer
+  contractType varchar
+  contractTerms varchar
+  contractStartDate varchar
+  contractEndDate varchar
+  contractStatus varchar
+  created_at timestamp
+  updated_at timestamp
+}
+
+
+Ref: "businessUsers"."businessId" > "businesses"."id"
+Ref: "businessUsers"."userId" > "users"."id"
+
+Ref: "businessServices"."businessId" > "businesses"."id"
+
+Ref: "businessConnections"."businessId1" > "businesses"."id"
+Ref: "businessConnections"."businessId2" > "businesses"."id"
+
+Ref: "businessRequests"."businessId" > "businesses"."id"
+Ref: "businessRequests"."serviceId" > "businessServices"."id"
+Ref: "businessRequests"."targetBusinessId" > "businesses"."id"
+
+Ref: "businessContracts"."businessId1" > "businesses"."id"
+Ref: "businessContracts"."businessId2" > "businesses"."id"
