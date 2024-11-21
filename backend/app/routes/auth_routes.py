@@ -10,13 +10,14 @@ from app.forms import LoginForm, SignupForm
 auth_routes = Blueprint('auth_routes', __name__)
 
 # Login Route
-@auth_routes.route('/login', methods=['POST'])
+@auth_routes.route('/login', methods=['GET','POST'])
 def login():
     form = LoginForm()
     if form.validate_on_submit():
         user = User.query.filter(User.email == form.email.data).first()
         login_user(user)
-        return jsonify({'message': 'Logged in successfully', 'user': user.to_dict()}, 200)
+        return jsonify({'message': 'Logged in successfully', 'user': user.to_dict()})
+    print(form.errors)
     return jsonify({'errors': form.errors}, 400)
 
 # Signup Route
@@ -36,7 +37,7 @@ def sign_up():
         db.session.add(user)
         db.session.commit()
         login_user(user)
-        return jsonify({'message': 'User created successfully', 'user': user.to_dict()}, 200)
+        return jsonify({'message': 'User created successfully', 'user': user.to_dict()})
     return jsonify({'errors': form.errors}, 400)
 
 # Authenticate Route
@@ -51,4 +52,4 @@ def authenticate():
 @login_required
 def logout():
     logout_user()
-    return jsonify({'message': 'User logged out'}, 200)
+    return jsonify({'message': 'User logged out'})

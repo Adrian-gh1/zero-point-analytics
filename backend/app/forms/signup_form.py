@@ -5,12 +5,12 @@ from wtforms import StringField, PasswordField
 from wtforms.validators import DataRequired, Email, Length, ValidationError
 from app.models import User
 
-def unique_email(field):
+def unique_email(form, field):
     user = User.query.filter(User.email == field.data).first()
     if user:
         raise ValidationError("Email already exists.")
 
-def unique_username(field):
+def unique_username(form, field):
     user = User.query.filter(User.username == field.data).first()
     if user:
         raise ValidationError("Username already exists.")

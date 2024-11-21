@@ -17,6 +17,8 @@ sqlalchemy = "*"
 wtforms = "*"
 flask-wtf = "*"
 flask-login = "*"
+email-validator = "*"
+flask-cors = "*"
 
 [dev-packages]
 
