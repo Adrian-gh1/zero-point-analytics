@@ -7,6 +7,7 @@ from flask_wtf.csrf import CSRFProtect
 from app.config import Configuration
 from app.routes import user_routes, auth_routes
 from app.extensions import db, migrate
+from flask_migrate import Migrate
 from app.seeds import seed_commands
 from app.models import User
 
@@ -30,11 +31,12 @@ def create_app():
 
     db.init_app(app)
     migrate.init_app(app, db)
+    # Migrate(app, db)
 
     app.cli.add_command(seed_commands)
 
-    with app.app_context():
-        db.create_all()
+    # with app.app_context():
+    #     db.create_all()
 
     app.register_blueprint(user_routes)
     app.register_blueprint(auth_routes)
