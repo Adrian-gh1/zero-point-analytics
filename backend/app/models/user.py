@@ -8,7 +8,8 @@ from app.config import Configuration
 
 class User(db.Model, UserMixin):
     __tablename__ = 'users'
-    __table_args__ = {'schema': Configuration.SCHEMA}
+    if Configuration.FLASK_ENV == 'Production':
+        __table_args__ = {'schema': Configuration.SCHEMA}
 
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(80), unique=True, nullable=False)
