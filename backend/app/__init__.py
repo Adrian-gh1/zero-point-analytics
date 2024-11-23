@@ -30,8 +30,8 @@ def create_app():
     login_manager.login_view = 'auth_routes.login'
 
     db.init_app(app)
-    migrate.init_app(app, db)
-    # Migrate(app, db)
+    # migrate.init_app(app, db)
+    Migrate(app, db)
 
     app.cli.add_command(seed_commands)
 
