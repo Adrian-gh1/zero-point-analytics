@@ -15,7 +15,7 @@ function LoginFormPage() {
 
     useEffect(() => {
         const fetchCsrfToken = async () => {
-            const response = await fetch("http://127.0.0.1:5000/csrf-token");
+            const response = await fetch("/api/csrf-token");
             const data = await response.json();
             setCsrfToken(data.csrf_token);
         };

@@ -67,7 +67,7 @@ CORS(app)
 #     return User.query.get(int(user_id))
 
 
-@app.route('/csrf-token', methods=['GET'])
+@app.route('/api/csrf-token', methods=['GET'])
 def get_csrf_token():
     print("CSRF token route hit")
     csrf_token = generate_csrf()
