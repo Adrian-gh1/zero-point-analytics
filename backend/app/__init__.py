@@ -11,41 +11,54 @@ from flask_migrate import Migrate
 from app.seeds import seed_commands
 from app.models import User
 
-login_manager = LoginManager()
+# login = LoginManager()
 
 csrf = CSRFProtect()
 
 def create_app():
     app = Flask(__name__)
-    app.config.from_object(Configuration)
+    # app.config.from_object(Configuration)
+
+    login = LoginManager(app)
+    login.login_view = 'auth_routes.login'
 
     csrf.init_app(app)
+
+    @login.user_loader
+    def load_user(user_id):
+        return User.query.get(int(user_id))
 
     # NOTE: For backend testing
     # app.config['WTF_CSRF_ENABLED'] = False
 
-    CORS(app)
+    # CORS(app)
 
-    login_manager.init_app(app)
-    login_manager.login_view = 'auth_routes.login'
+    # login = LoginManager(app)
+    # # login.init_app(app)
+    # login.login_view = 'auth_routes.login'
 
-    db.init_app(app)
-    # migrate.init_app(app, db)
-    Migrate(app, db)
+    # db.init_app(app)
+    # # migrate.init_app(app, db)
+    # Migrate(app, db)
 
     app.cli.add_command(seed_commands)
 
     # with app.app_context():
     #     db.create_all()
 
+    app.config.from_object(Configuration)
     app.register_blueprint(user_routes)
     app.register_blueprint(auth_routes)
+    db.init_app(app)
+    Migrate(app, db)
+
+    CORS(app)
 
     return app
 
 app = create_app()
 
 
-@login_manager.user_loader
-def load_user(user_id):
-    return User.query.get(int(user_id))
+# @login.user_loader
+# def load_user(user_id):
+#     return User.query.get(int(user_id))
