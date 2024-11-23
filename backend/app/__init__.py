@@ -1,9 +1,9 @@
 # backend/app/__init__.py
 
-from flask import Flask
+from flask import Flask, jsonify
 from flask_login import LoginManager
 from flask_cors import CORS
-from flask_wtf.csrf import CSRFProtect
+from flask_wtf.csrf import CSRFProtect, generate_csrf
 from app.config import Configuration
 from app.routes import user_routes, auth_routes
 from app.extensions import db, migrate
@@ -15,50 +15,60 @@ from app.models import User
 
 csrf = CSRFProtect()
 
-def create_app():
-    app = Flask(__name__)
-    # app.config.from_object(Configuration)
+# def create_app():
+app = Flask(__name__)
 
-    login = LoginManager(app)
-    login.login_view = 'auth_routes.login'
+csrf.init_app(app)
 
-    csrf.init_app(app)
+app.config.from_object(Configuration)
 
-    @login.user_loader
-    def load_user(user_id):
-        return User.query.get(int(user_id))
+login = LoginManager(app)
+login.login_view = 'auth_routes.login'
 
-    # NOTE: For backend testing
-    # app.config['WTF_CSRF_ENABLED'] = False
+# csrf.init_app(app)
 
-    # CORS(app)
+@login.user_loader
+def load_user(user_id):
+    return User.query.get(int(user_id))
 
-    # login = LoginManager(app)
-    # # login.init_app(app)
-    # login.login_view = 'auth_routes.login'
+# NOTE: For backend testing
+# app.config['WTF_CSRF_ENABLED'] = False
 
-    # db.init_app(app)
-    # # migrate.init_app(app, db)
-    # Migrate(app, db)
+# CORS(app)
 
-    app.cli.add_command(seed_commands)
+# login = LoginManager(app)
+# # login.init_app(app)
+# login.login_view = 'auth_routes.login'
 
-    # with app.app_context():
-    #     db.create_all()
+# db.init_app(app)
+# # migrate.init_app(app, db)
+# Migrate(app, db)
 
-    app.config.from_object(Configuration)
-    app.register_blueprint(user_routes)
-    app.register_blueprint(auth_routes)
-    db.init_app(app)
-    Migrate(app, db)
+app.cli.add_command(seed_commands)
 
-    CORS(app)
+# with app.app_context():
+#     db.create_all()
 
-    return app
+# app.config.from_object(Configuration)
+app.register_blueprint(user_routes)
+app.register_blueprint(auth_routes)
+db.init_app(app)
+Migrate(app, db)
 
-app = create_app()
+CORS(app)
+
+    # return app
+
+# app = create_app()
 
 
 # @login.user_loader
 # def load_user(user_id):
 #     return User.query.get(int(user_id))
+
+
+@app.route('/csrf-token', methods=['GET'])
+def get_csrf_token():
+    print("CSRF token route hit")
+    csrf_token = generate_csrf()
+    return jsonify({'csrf_token': csrf_token})
