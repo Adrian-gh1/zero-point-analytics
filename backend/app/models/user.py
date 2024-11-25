@@ -8,6 +8,7 @@ from app.config import Configuration
 
 class User(db.Model, UserMixin):
     __tablename__ = 'users'
+    
     if Configuration.FLASK_ENV == 'Production':
         __table_args__ = {'schema': Configuration.SCHEMA}
 

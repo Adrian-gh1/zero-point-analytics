@@ -1,16 +1,20 @@
 # backend/app/__init__.py
 
 import os
-from flask import Flask, request, redirect, jsonify
+from flask import Flask, request, redirect
 from flask_login import LoginManager
 from flask_cors import CORS
-from flask_wtf.csrf import CSRFProtect, generate_csrf
+from flask_wtf.csrf import generate_csrf
 from app.config import Configuration
-from app.routes import user_routes, auth_routes
-from app.extensions import db, migrate
 from flask_migrate import Migrate
-from app.seeds import seed_commands
+
+from app.extensions import db
 from app.models import User
+from app.seeds import seed_commands
+
+from app.routes import auth_routes
+from app.routes import user_routes
+from app.routes import business_routes
 
 # app = Flask(__name__, static_folder="../frontend/dist", static_url_path="/")
 app = Flask(__name__)
@@ -25,8 +29,9 @@ def load_user(user_id):
 app.cli.add_command(seed_commands)
 
 app.config.from_object(Configuration)
-app.register_blueprint(user_routes, url_prefix='/api/users')
 app.register_blueprint(auth_routes, url_prefix='/api/auth')
+app.register_blueprint(user_routes, url_prefix='/api/users')
+app.register_blueprint(business_routes, url_prefix='/api/businesses')
 db.init_app(app)
 Migrate(app, db)
 
