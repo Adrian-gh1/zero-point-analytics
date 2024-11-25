@@ -41,8 +41,8 @@ def seed_users():
 
 def undo_users():
     if Configuration.FLASK_ENV == "production":
-        db.session.execute(f"TRUNCATE table {Configuration.SCHEMA}.users RESTART IDENTITY CASCADE;")
+        db.session.execute(text(f"TRUNCATE table {Configuration.SCHEMA}.users RESTART IDENTITY CASCADE;"))
     else:
-        db.session.execute("DELETE FROM users")
+        db.session.execute(text("DELETE FROM users"))
 
     db.session.commit()
