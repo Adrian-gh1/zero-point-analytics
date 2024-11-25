@@ -1,7 +1,8 @@
 # backend/app/routes/auth_routes.py
 
-from flask import Blueprint, jsonify
+from flask import Blueprint, request, jsonify
 from flask_login import login_user, logout_user, login_required, current_user
+from flask_wtf.csrf import generate_csrf 
 from werkzeug.security import generate_password_hash
 from app.extensions import db
 from app.models import User
@@ -10,14 +11,14 @@ from app.forms import LoginForm, SignupForm
 auth_routes = Blueprint('auth_routes', __name__)
 
 # Login Route
-@auth_routes.route('/login', methods=['GET','POST'])
+@auth_routes.route('/login', methods=['POST'])
 def login():
     form = LoginForm()
+    form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
         user = User.query.filter(User.email == form.email.data).first()
         login_user(user)
         return jsonify({'message': 'Logged in successfully', 'user': user.to_dict()})
-    print(form.errors)
     return jsonify({'errors': form.errors}, 400)
 
 # Signup Route
@@ -53,3 +54,7 @@ def authenticate():
 def logout():
     logout_user()
     return jsonify({'message': 'User logged out'})
+
+@auth_routes.route('/unauthorized')
+def unauthorized():
+    return {'errors': {'message': 'Unauthorized'}}, 401
