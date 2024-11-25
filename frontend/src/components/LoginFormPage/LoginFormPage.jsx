@@ -1,8 +1,10 @@
 // frontend/src/components/LoginFormPage/LoginFormPage.jsx
 
-import { useState, useEffect } from "react";
+// import { useState, useEffect } from "react";
+import { useState } from "react";
 import { thunkLogin } from "../../redux/session";
-import { useDispatch, useSelector } from "react-redux";
+// import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 // import { Navigate, useNavigate } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import './LoginFormPage.css';
