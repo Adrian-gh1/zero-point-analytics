@@ -25,7 +25,7 @@ def seed_businesses():
 
 def undo_businesses():
     if Configuration.FLASK_ENV == "production":
-        db.session.execute(f"TRUNCATE table {Configuration.SCHEMA}.businesses RESTART IDENTITY CASCADE;")
+        db.session.execute(text(f"TRUNCATE table {Configuration.SCHEMA}.businesses RESTART IDENTITY CASCADE;"))
     else:
         db.session.execute(text("DELETE FROM businesses"))
 
