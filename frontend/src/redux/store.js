@@ -7,9 +7,11 @@ import { combineReducers } from 'redux';
 
 import thunk from 'redux-thunk';
 import sessionReducer from './session';
+import businessesReducer from './businesses';
 
 const rootReducer = combineReducers({
     session: sessionReducer,
+    businesses: businessesReducer
 });
 
 let enhancer;
