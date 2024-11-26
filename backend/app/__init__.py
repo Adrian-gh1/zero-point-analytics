@@ -16,7 +16,7 @@ from app.routes import auth_routes
 from app.routes import user_routes
 from app.routes import business_routes
 
-app = Flask(__name__, static_folder="../frontend/dist", static_url_path="/")
+app = Flask(__name__, static_folder="../../frontend/dist", static_url_path="/")
 # app = Flask(__name__)
 
 login = LoginManager(app)
@@ -87,6 +87,6 @@ def react_root(path):
         return app.send_from_directory("public", "favicon.ico")
     return app.send_static_file("index.html")
 
-# @app.errorhandler(404)
-# def not_found(e):
-#     return app.send_static_file("index.html")
+@app.errorhandler(404)
+def not_found(e):
+    return app.send_static_file("index.html")
