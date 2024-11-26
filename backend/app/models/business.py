@@ -6,7 +6,7 @@ from app.config import Configuration
 class Business(db.Model):
     __tablename__ = 'businesses'
     
-    if Configuration.FLASK_ENV == 'Production':
+    if Configuration.FLASK_ENV == 'production':
         __table_args__ = {'schema': Configuration.SCHEMA}
 
     id = db.Column(db.Integer, primary_key=True)

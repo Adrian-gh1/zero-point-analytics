@@ -9,7 +9,7 @@ from app.config import Configuration
 class User(db.Model, UserMixin):
     __tablename__ = 'users'
     
-    if Configuration.FLASK_ENV == 'Production':
+    if Configuration.FLASK_ENV == 'production':
         __table_args__ = {'schema': Configuration.SCHEMA}
 
     id = db.Column(db.Integer, primary_key=True)
