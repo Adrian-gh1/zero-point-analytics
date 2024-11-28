@@ -1,10 +1,11 @@
 // frontend/src/components/LoginFormPage/LoginFormPage.jsx
 
 // import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import { useState } from "react";
 import { thunkLogin } from "../../redux/session";
-// import { useDispatch, useSelector } from "react-redux";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+// import { useDispatch } from "react-redux";
 // import { Navigate, useNavigate } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import './LoginFormPage.css';
@@ -12,30 +13,28 @@ import './LoginFormPage.css';
 function LoginFormPage() {
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    // const sessionUser = useSelector(state => state.session.user);
+    const sessionUser = useSelector(state => state.session.user);  
 
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [error, setError] = useState(null);
-    // const [errors, setErrors] = useState({});
+    const [isSubmitted, setIsSubmitted] = useState(false);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-    
-        const serverResponse = await dispatch(
-            thunkLogin({
-                email,
-                password,
-            })
-        );
+        setIsSubmitted(true);
+        await dispatch(thunkLogin({email, password}));   
+    };
 
-        if (serverResponse && serverResponse.errors) {
-            setError(serverResponse.errors);
-          } else {
+    useEffect(() => {
+        if (sessionUser && sessionUser.id) {
             navigate("/");
-          }
-        // navigate("/");
-      };
+            }
+            
+        if (isSubmitted && !sessionUser) {
+            setError("Invalid email or password. Please try again.");
+        }
+    }, [sessionUser, navigate, isSubmitted])
 
     return (
         <div>

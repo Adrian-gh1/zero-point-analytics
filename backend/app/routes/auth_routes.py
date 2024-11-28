@@ -18,8 +18,8 @@ def login():
     if form.validate_on_submit():
         user = User.query.filter(User.email == form.email.data).first()
         login_user(user)
-        return jsonify({'message': 'Logged in successfully', 'user': user.to_dict()})
-    return jsonify({'errors': form.errors}, 400)
+        return user.to_dict()
+    return form.errors, 401
 
 # Signup Route
 @auth_routes.route('/signup', methods=['POST'])
