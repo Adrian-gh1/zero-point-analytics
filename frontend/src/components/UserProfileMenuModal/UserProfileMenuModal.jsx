@@ -1,11 +1,11 @@
 // frontend/src/components/UserProfileMenuModal/UserProfileMenuModal.jsx
 
-import { useDispatch, useSelector } from 'react-redux';
+// import { useDispatch, useSelector } from 'react-redux';
 import './UserProfileMenuModal.css'
 
 function UserProfileMenuModal({ show, onClose }) {
-    const dispatch = useDispatch();
-    const sessionUser = useSelector(state => state.session.user);
+    // const dispatch = useDispatch();
+    // const sessionUser = useSelector(state => state.session.user);
     if (!show) return null;
 
     return (
