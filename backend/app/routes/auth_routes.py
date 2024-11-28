@@ -25,6 +25,7 @@ def login():
 @auth_routes.route('/signup', methods=['POST'])
 def sign_up():
     form = SignupForm()
+    form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
         hashed_password = generate_password_hash(form.password.data)
         user = User(
@@ -38,8 +39,8 @@ def sign_up():
         db.session.add(user)
         db.session.commit()
         login_user(user)
-        return jsonify({'message': 'User created successfully', 'user': user.to_dict()})
-    return jsonify({'errors': form.errors}, 400)
+        return user.to_dict()
+    return form.errors, 400
 
 # Authenticate Route
 @auth_routes.route('/')

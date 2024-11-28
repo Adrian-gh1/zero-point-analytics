@@ -54,15 +54,19 @@ export const thunkSignup = (user) => async (dispatch) => {
     body: JSON.stringify(user)
   });
 
-  if(response.ok) {
-    const data = await response.json();
-    dispatch(setUser(data));
-  } else if (response.status < 500) {
-    const errorMessages = await response.json();
-    return errorMessages
-  } else {
-    return { server: "Something went wrong. Please try again" }
-  }
+  // if(response.ok) {
+  //   const data = await response.json();
+  //   dispatch(setUser(data));
+  // } else if (response.status < 500) {
+  //   const errorMessages = await response.json();
+  //   return errorMessages
+  // } else {
+  //   return { server: "Something went wrong. Please try again" }
+  // }
+
+  const data = await response.json();
+  dispatch(setUser(data));
+  return response;
 };
 
 export const thunkLogout = () => async (dispatch) => {
