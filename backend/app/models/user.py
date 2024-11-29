@@ -21,7 +21,7 @@ class User(db.Model, UserMixin):
     hashedPassword = db.Column(db.String(255), nullable=False)
 
     # NOTE: Connects Business ID to User
-    business_id = db.Column(db.Integer, db.ForeignKey('businesses.id'), nullable=False)    
+    business_id = db.Column(db.Integer, db.ForeignKey('businesses.id'), nullable=True)    
     business = db.relationship('Business', backref=db.backref('employees', lazy=True))
     
     def to_dict(self):

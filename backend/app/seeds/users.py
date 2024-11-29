@@ -7,6 +7,7 @@ from app.models import User
 from werkzeug.security  import generate_password_hash
 
 demo = User(
+    business_id=None,
     username="Demo",
     email="demo@aa.io",
     firstName="Demo",
@@ -16,6 +17,7 @@ demo = User(
 )
 
 john = User(
+    business_id=None,
     username="John",
     email="john@aa.io",
     firstName="John",
@@ -25,6 +27,7 @@ john = User(
 )
 
 jane = User(
+    business_id=None,
     username="Jane",
     email="jane@aa.io",
     firstName="Jane",
