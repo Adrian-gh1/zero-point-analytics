@@ -21,7 +21,19 @@ export const router = createBrowserRouter([
             {
                 path: '/signup',
                 element: <SignupFormPage />,
-            }
+            },
+            // {
+            //     path: '/businessPortfolio',
+            //     element: <SignupFormPage />,
+            // },
+            // {
+            //     path: '/userProfile',
+            //     element: <SignupFormPage />,
+            // },
+            // {
+            //     path: '/businessProfile',
+            //     element: <SignupFormPage />,
+            // }
         ],
     },
 ]);

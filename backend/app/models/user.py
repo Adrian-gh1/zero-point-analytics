@@ -19,6 +19,10 @@ class User(db.Model, UserMixin):
     lastName = db.Column(db.String(80), nullable=False)
     role = db.Column(db.String(80), nullable=False)
     hashedPassword = db.Column(db.String(255), nullable=False)
+
+    # NOTE: Connects Business ID to User
+    business_id = db.Column(db.Integer, db.ForeignKey('businesses.id'), nullable=False)    
+    business = db.relationship('Business', backref=db.backref('employees', lazy=True))
     
     def to_dict(self):
         return {
@@ -27,7 +31,8 @@ class User(db.Model, UserMixin):
             'email': self.email,
             'firstName': self.firstName,
             'lastName': self.lastName,
-            'role': self.role
+            'role': self.role,
+            'business': self.business.to_dict() if self.business else None
         }
 
     def check_password(self, password):

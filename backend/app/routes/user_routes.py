@@ -15,6 +15,7 @@ user_routes = Blueprint('user', __name__)
 @user_routes.route('/', methods=['GET'])
 # @login_required
 def users():
+    pass
 
-    users = User.query.all()
-    return jsonify([user.to_dict() for user in users])
+    # users = User.query.all()
+    # return jsonify([user.to_dict() for user in users])

@@ -17,7 +17,6 @@ from app.routes import user_routes
 from app.routes import business_routes
 
 app = Flask(__name__, static_folder="../../frontend/dist", static_url_path="/")
-# app = Flask(__name__)
 
 login = LoginManager(app)
 login.login_view = 'auth_routes.login'

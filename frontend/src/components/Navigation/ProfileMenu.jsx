@@ -57,14 +57,16 @@ function ProfileMenu() {
                         {!sessionUser?.id ? (
                             <>
                                 <li onClick={() => handleNavigate("/login")}>Log In</li>
-                                <li onClick={() => handleNavigate("/signup")}>Sign Up</li>
+                                <li onClick={() => handleNavigate("/signup")}>Create Account</li>
                             </>
                         ) : (
                             <>
                                 <li>{sessionUser.firstName} {sessionUser.lastName}</li>
                                 <li>{sessionUser.role} at [Company Name]</li>
-                                <li onClick={() => handleNavigate("/profile")}>Profile</li>
-                                <li onClick={() => handleNavigate("/settings")}>Settings</li>
+                                <li onClick={() => handleNavigate("/businessPortfolio")}>Business Portfolio</li>
+                                <li onClick={() => handleNavigate("/userProfile")}>User Profile</li>
+                                <li onClick={() => handleNavigate("/businessProfile")}>Business Profile</li>
+                                {/* <li onClick={() => handleNavigate("/settings")}>Settings</li> */}
                                 <li onClick={handleLogout}>Logout</li>
                             </>
                         )}

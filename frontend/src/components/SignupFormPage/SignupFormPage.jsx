@@ -86,7 +86,7 @@ function SignupFormPage() {
     return (
         // <div>Sign Up Page</div>
         <div className="signup-form-container">
-            <h2>Sign Up</h2>
+            <h2>Zero Point</h2>
             <form onSubmit={handleSubmit} className="signup-form">
                 <div className="form-group">
                     <label htmlFor="username">Username</label>
@@ -166,7 +166,7 @@ function SignupFormPage() {
                     {errors.role && <p className="error">{errors.role}</p>}
                 </div>
 
-                <button type="submit">Sign Up</button>
+                <button type="submit">Continue</button>
             </form>
         </div>
         

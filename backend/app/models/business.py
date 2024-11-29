@@ -17,3 +17,18 @@ class Business(db.Model):
     business_description = db.Column(db.String(500), nullable=True)
     business_industry = db.Column(db.String(255), nullable=True)
     business_category = db.Column(db.String(255), nullable=True)
+
+    # NOTE: For Businesses with multiple User
+    # users = db.relationship('User', backref='business', lazy=True)
+
+    def to_dict(self):
+        return {
+            'id': self.id,
+            'business_name': self.business_name,
+            'business_address': self.business_address,
+            'business_email': self.business_email,
+            'business_website': self.business_website,
+            'business_description': self.business_description,
+            'business_industry': self.business_industry,
+            'business_category': self.business_category
+        }
