@@ -11,7 +11,8 @@ import './ProfileMenu.css';
 function ProfileMenu() {
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    const sessionUser = useSelector(state => state.session.user);         
+    const sessionUser = useSelector(state => state.session.user);
+    const userBusiness = useSelector(state => state.businesses.userBusiness)        
 
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const profileRef = useRef(null);
@@ -62,7 +63,11 @@ function ProfileMenu() {
                         ) : (
                             <>
                                 <li>{sessionUser.firstName} {sessionUser.lastName}</li>
-                                <li>{sessionUser.role} at [Company Name]</li>
+                                <li>
+                                    {sessionUser.role} at <br/>
+                                    {userBusiness.business_name}
+                                </li>
+                                {/* <li>{userBusiness.business_name}</li> */}
                                 <li onClick={() => handleNavigate("/businessPortfolio")}>Business Portfolio</li>
                                 <li onClick={() => handleNavigate("/userProfile")}>User Profile</li>
                                 <li onClick={() => handleNavigate("/businessProfile")}>Business Profile</li>

@@ -9,15 +9,22 @@ import './LandingPage.css';
 function LandingPage() {
     const dispatch = useDispatch();
     const navigate = useNavigate();
+    const sessionUser = useSelector(state => state.session.user);
     const businesses = useSelector(state => state.businesses.businesses);
 
+    // Dynamic States
     useEffect(() => {
         dispatch(thunkGetAllBusinesses())
     }, [dispatch]);
 
+    // Static States
     const businessHandler = (businessId) => {
-        console.log(`Navigate to: ${businessId}`);
-        navigate(`business/${businessId}`);
+        if (sessionUser) {
+            navigate(`business/${businessId}`);
+        }
+        else {
+            navigate('/login');
+        }
     };
 
     return (

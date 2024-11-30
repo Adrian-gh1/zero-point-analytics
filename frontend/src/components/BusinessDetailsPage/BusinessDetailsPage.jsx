@@ -13,9 +13,6 @@ function BusinessDetailsPage() {
     const userBusiness = useSelector(state => state.businesses.userBusiness);
     const { businessId } = useParams();
 
-    console.log('Tracer: 1.1', selectedBusiness);
-    console.log('Tracer: 1.2', userBusiness);
-
     useEffect(() => {
         dispatch(thunkGetBusiness(businessId));
         dispatch(thunkGetUserBusiness());
