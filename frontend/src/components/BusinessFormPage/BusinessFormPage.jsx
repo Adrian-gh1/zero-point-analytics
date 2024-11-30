@@ -16,8 +16,11 @@ function BusinessFormPage() {
     const [businessIndustry, setBusinessIndustry] = useState('');
     const [businessCategory, setBusinessCategory] = useState('');
 
-    const [error, setError] = useState('');
-    const [successMessage, setSuccessMessage] = useState('');
+    // const [error, setError] = useState('');
+    // const [successMessage, setSuccessMessage] = useState('');
+
+    const [error] = useState('');
+    const [successMessage] = useState('');
 
     // Handle form submission
     const handleSubmit = async (e) => {
