@@ -8,6 +8,7 @@ from app.forms import BusinessForm
 
 business_routes = Blueprint('business_routes', __name__)
 
+# Get All Businesses
 @business_routes.route('/all', methods=['GET'])
 def get_all_businesses():
     # page = request.args.get('page', 1, type=int) 
@@ -41,6 +42,7 @@ def get_all_businesses():
         'business_category': business.business_category
     } for business in businesses],)
 
+# Get User Business
 @business_routes.route('/my-business', methods=['GET'])
 @login_required
 def get_user_business():
@@ -60,6 +62,7 @@ def get_user_business():
         'business_category': user_business.business_category
     })
 
+# Get a Selected Business
 @business_routes.route('/<int:businessId>', methods=['GET'])
 @login_required
 def get_business(businessId):
@@ -79,6 +82,49 @@ def get_business(businessId):
         'business_category': business.business_category
     })
 
+# Edit Business Details
+@business_routes.route('/edit', methods=['PATCH'])
+@login_required
+def update_business():
+    business = Business.query.filter_by(user_id=current_user.id).first()
+
+    if not business:
+        return jsonify({'error': 'Business not found for the current user'}), 404
+
+    data = request.get_json()
+
+    if 'business_name' in data:
+        business.business_name = data['business_name']
+    if 'business_address' in data:
+        business.business_address = data['business_address']
+    if 'business_email' in data:
+        business.business_email = data['business_email']
+    if 'business_website' in data:
+        business.business_website = data['business_website']
+    if 'business_description' in data:
+        business.business_description = data['business_description']
+    if 'business_industry' in data:
+        business.business_industry = data['business_industry']
+    if 'business_category' in data:
+        business.business_category = data['business_category']
+
+    db.session.commit()
+
+    return jsonify({
+        'message': 'Business updated successfully',
+        'business': {
+            'id': business.id,
+            'business_name': business.business_name,
+            'business_address': business.business_address,
+            'business_email': business.business_email,
+            'business_website': business.business_website,
+            'business_description': business.business_description,
+            'business_industry': business.business_industry,
+            'business_category': business.business_category
+        }
+    }), 200
+
+# Create a Business
 @business_routes.route('/create', methods=['POST'])
 @login_required
 def create_business():

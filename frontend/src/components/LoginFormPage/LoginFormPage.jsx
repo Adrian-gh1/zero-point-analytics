@@ -81,6 +81,10 @@ function LoginFormPage() {
                 <button onClick={demoLoginHandler}>Demo Login</button>
             </div>
 
+            <div>
+                Have an Account? Login
+            </div>
+
         </div>
     )
 }
