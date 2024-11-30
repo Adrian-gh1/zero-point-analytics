@@ -2,7 +2,7 @@
 
 from flask_login import UserMixin
 from werkzeug.security import check_password_hash
-from app.extensions import db
+from app.extensions import db, production_prefix
 from app.config import Configuration
 
 
@@ -20,9 +20,7 @@ class User(db.Model, UserMixin):
     role = db.Column(db.String(80), nullable=False)
     hashedPassword = db.Column(db.String(255), nullable=False)
 
-    # NOTE: Connects Business ID to User
-    business_id = db.Column(db.Integer, db.ForeignKey('businesses.id'), nullable=True)    
-    business = db.relationship('Business', backref=db.backref('employees', lazy=True))
+    businesses = db.relationship("Business", backref="users", cascade="all, delete-orphan")
     
     def to_dict(self):
         return {

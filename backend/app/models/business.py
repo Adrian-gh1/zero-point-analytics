@@ -1,6 +1,6 @@
 # backend/app/models/business.py
 
-from app.extensions import db
+from app.extensions import db, production_prefix
 from app.config import Configuration
 
 class Business(db.Model):
@@ -10,6 +10,7 @@ class Business(db.Model):
         __table_args__ = {'schema': Configuration.SCHEMA}
 
     id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey(production_prefix('users.id'), ondelete="CASCADE"), nullable=False)
     business_name = db.Column(db.String(255), nullable=False)
     business_address = db.Column(db.String(255), nullable=True)
     business_email = db.Column(db.String(255), nullable=True)
@@ -17,9 +18,6 @@ class Business(db.Model):
     business_description = db.Column(db.String(500), nullable=True)
     business_industry = db.Column(db.String(255), nullable=True)
     business_category = db.Column(db.String(255), nullable=True)
-
-    # NOTE: For Businesses with multiple User
-    # users = db.relationship('User', backref='business', lazy=True)
 
     def to_dict(self):
         return {

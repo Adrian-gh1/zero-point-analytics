@@ -1,45 +1,27 @@
 # backend/app/seeds/users.py
 
+from sqlalchemy.sql import text
+from werkzeug.security  import generate_password_hash
 from app.config import Configuration
 from app.extensions import db
-from sqlalchemy.sql import text
 from app.models import User
-from werkzeug.security  import generate_password_hash
-
-demo = User(
-    business_id=1,
-    username="Demo",
-    email="demo@aa.io",
-    firstName="Demo",
-    lastName="User",
-    role="Manager",
-    hashedPassword=generate_password_hash("password")
-)
-
-john = User(
-    business_id=2,
-    username="John",
-    email="john@aa.io",
-    firstName="John",
-    lastName="Doe",
-    role="Project Manager",
-    hashedPassword=generate_password_hash("password")
-)
-
-jane = User(
-    business_id=3,
-    username="Jane",
-    email="jane@aa.io",
-    firstName="Jane",
-    lastName="Smith",
-    role="HR Manager",
-    hashedPassword=generate_password_hash("password")
-)
+from app.seeds.seed_data.data_users import data_users
 
 def seed_users():
-    db.session.add(demo)
-    db.session.add(john)
-    db.session.add(jane)
+    user_list = []
+    for user in data_users:
+        hashed_password = generate_password_hash(user['hashed_password'])  
+        user_class = User(
+            username=user['username'],
+            email=user['email'],
+            firstName=user['first_name'],
+            lastName=user['last_name'],
+            role=user['role'],
+            hashedPassword=hashed_password
+        )
+        user_list.append(user_class)
+
+    db.session.bulk_save_objects(user_list)
     db.session.commit()
 
 def undo_users():
