@@ -20,7 +20,7 @@ class User(db.Model, UserMixin):
     role = db.Column(db.String(80), nullable=False)
     hashedPassword = db.Column(db.String(255), nullable=False)
 
-    businesses = db.relationship("Business", backref="users", cascade="all, delete-orphan")
+    business = db.relationship("Business", backref="users", cascade="all, delete-orphan")
     
     def to_dict(self):
         return {
