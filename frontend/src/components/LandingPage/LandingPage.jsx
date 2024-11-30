@@ -2,20 +2,22 @@
 
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import { thunkGetAllBusinesses } from '../../redux/businesses';
 import './LandingPage.css';
 
 function LandingPage() {
     const dispatch = useDispatch();
+    const navigate = useNavigate();
     const businesses = useSelector(state => state.businesses.businesses);
 
     useEffect(() => {
         dispatch(thunkGetAllBusinesses())
     }, [dispatch]);
 
-    const businessHandler = (businessName) => {
-        console.log(`Navigate to: ${businessName}`);
-        
+    const businessHandler = (businessId) => {
+        console.log(`Navigate to: ${businessId}`);
+        navigate(`business/${businessId}`);
     };
 
     return (
@@ -28,7 +30,7 @@ function LandingPage() {
                     <div
                         key={business.id}
                         className="business-item"
-                        onClick={() => businessHandler(business.business_name)}
+                        onClick={() => businessHandler(business.id)}
                     >
                         <div className="business-info">
                             <h3>{business.business_name}</h3>

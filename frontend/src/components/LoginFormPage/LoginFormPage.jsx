@@ -18,23 +18,26 @@ function LoginFormPage() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [error, setError] = useState(null);
-    const [isSubmitted, setIsSubmitted] = useState(false);
+    // const [isSubmitted, setIsSubmitted] = useState(false);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        setIsSubmitted(true);
-        await dispatch(thunkLogin({email, password}));   
+        // setIsSubmitted(true);
+        setError(null);
+        const result = await dispatch(thunkLogin({email, password}));
+        
+        if (result.error) {
+            setError("Invalid email or password. Please try again.");
+        }
     };
 
+    console.log('Tracer 2.1:', sessionUser);
+    
     useEffect(() => {
         if (sessionUser && sessionUser.id) {
             navigate("/");
-            }
-            
-        if (isSubmitted && !sessionUser) {
-            setError("Invalid email or password. Please try again.");
-        }
-    }, [sessionUser, navigate, isSubmitted])
+        }            
+    }, [sessionUser, navigate])
 
     return (
         <div>

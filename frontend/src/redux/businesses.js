@@ -1,15 +1,33 @@
 // frontend/src/redux/businesses.js
 
 const GET_ALL_BUSINESSES = 'businesses/getAllBusinesses';
+const GET_USER_BUSINESS = 'businesses/getUserBusiness';
+const GET_BUSINESS = 'businesses/getBusiness';
 const CREATE_BUSINESS = 'businesses/createBusiness';
 const initialState = {
-    businesses: []
+    businesses: [],
+    selectedBusiness: null,
+    userBusiness: {}
 };
 
 // Action Creators
 const actionGetAllBusinesses = (data) => {
     return {
         type: GET_ALL_BUSINESSES,
+        payload: data
+    };
+};
+
+const actionGetUserBusiness = (data) => {
+    return {
+        type: GET_USER_BUSINESS,
+        payload: data
+    };
+};
+
+const actionGetBusiness = (data) => {
+    return {
+        type: GET_BUSINESS,
         payload: data
     };
 };
@@ -31,6 +49,24 @@ export const thunkGetAllBusinesses = () => async (dispatch) => {
     return response;
 };
 
+export const thunkGetUserBusiness = () => async (dispatch) => {    
+    const response = await fetch(`/api/businesses/my-business`, {
+        method: 'GET'
+    });
+    const data = await response.json();
+    dispatch(actionGetUserBusiness(data));
+    return response;
+};
+
+export const thunkGetBusiness = (businessId) => async (dispatch) => {    
+    const response = await fetch(`/api/businesses/${businessId}`, {
+        method: 'GET'
+    });
+    const data = await response.json();
+    dispatch(actionGetBusiness(data));
+    return response;
+};
+
 export const thunkCreateBusiness = (businessData) => async (dispatch) => {
     const response = await fetch('/api/businesses/all', {
         method: 'POST',
@@ -47,6 +83,10 @@ function businessesReducer(state = initialState, action) {
     switch (action.type) {
         case GET_ALL_BUSINESSES:
             return { ...state, businesses: action.payload };
+        case GET_USER_BUSINESS:
+            return { ...state, userBusiness: action.payload };
+        case GET_BUSINESS:
+            return { ...state, selectedBusiness: action.payload };
         case CREATE_BUSINESS:
             return { ...state, businesses: [...state.businesses, action.payload] };
         default:

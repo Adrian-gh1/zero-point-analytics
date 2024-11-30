@@ -50,11 +50,11 @@ def authenticate():
     return jsonify({'errors': {'message': 'Unauthorized'}}, 401)
 
 # Logout Route
-@auth_routes.route('/logout')
+@auth_routes.route('/logout', methods=['POST'])
 @login_required
 def logout():
     logout_user()
-    return jsonify({'message': 'User logged out'})
+    return jsonify({'message': 'User logged out'}), 200
 
 @auth_routes.route('/unauthorized')
 def unauthorized():

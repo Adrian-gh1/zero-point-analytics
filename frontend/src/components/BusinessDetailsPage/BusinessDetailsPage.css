@@ -1,0 +1,79 @@
+/* frontend/src/components/BusinessDetailsPage/BusinessDetailsPage.css */
+
+.business-comparison-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    height: 100vh;
+}
+
+.business-comparison {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 1200px;
+    gap: 20px;
+}
+
+.business-column {
+    flex: 1;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: #f9f9f9;
+    height: auto;
+}
+
+.business-column h3 {
+    text-align: center;
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+}
+
+.business-detail {
+    margin-bottom: 15px;
+    font-size: 1.1rem;
+}
+
+.business-detail strong {
+    font-weight: bold;
+}
+
+.business-detail span {
+    font-weight: normal;
+}
+
+/* Flexbox layout for button container */
+.button-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-self: center;  /* Align buttons in the center between the columns */
+    justify-content: center;
+    margin-top: 50px;
+}
+
+.action-button {
+    padding: 10px 20px;
+    font-size: 1rem;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.action-button:hover {
+    background-color: #0056b3;
+}
+
+@media (max-width: 768px) {
+    .business-comparison {
+        flex-direction: column;
+        gap: 10px;
+    }
+}

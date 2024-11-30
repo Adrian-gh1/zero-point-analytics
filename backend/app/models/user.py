@@ -30,7 +30,6 @@ class User(db.Model, UserMixin):
             'firstName': self.firstName,
             'lastName': self.lastName,
             'role': self.role,
-            'business': self.business.to_dict() if self.business else None
         }
 
     def check_password(self, password):

@@ -1,16 +1,34 @@
 # backend/app/routes/business_routes.py
 
 from flask import Blueprint, request, jsonify, redirect, url_for
-from flask_login import login_user, logout_user, login_required
+from flask_login import login_user, logout_user, login_required, current_user
 from app.extensions import db
-from app.models import Business
-from app.forms import business_form
+from app.models import Business, User
+from app.forms import BusinessForm
 
 business_routes = Blueprint('business_routes', __name__)
 
-
 @business_routes.route('/all', methods=['GET'])
-def get_businesses():
+def get_all_businesses():
+    # page = request.args.get('page', 1, type=int) 
+    # per_page = request.args.get('per_page', 10, type=int)
+    # businesses = Business.query.paginate(page, per_page, False)
+
+    # return jsonify({
+    #     'businesses': [{
+    #         'id': business.id,
+    #         'business_name': business.business_name,
+    #         'business_address': business.business_address,
+    #         'business_email': business.business_email,
+    #         'business_website': business.business_website,
+    #         'business_description': business.business_description,
+    #         'business_industry': business.business_industry,
+    #         'business_category': business.business_category
+    #     } for business in businesses.items],
+    #     'total_pages': businesses.pages,
+    #     'current_page': businesses.page,
+    #     'total_items': businesses.total
+
     businesses = Business.query.all()
     return jsonify([{
         'id': business.id,
@@ -21,12 +39,50 @@ def get_businesses():
         'business_description': business.business_description,
         'business_industry': business.business_industry,
         'business_category': business.business_category
-    } for business in businesses])
+    } for business in businesses],)
+
+@business_routes.route('/my-business', methods=['GET'])
+@login_required
+def get_user_business():
+    user_business = Business.query.filter_by(user_id=current_user.id).first()
+   
+    if not user_business:
+        return jsonify({'error': 'User does not have a business'}), 404
+
+    return jsonify({
+        'id': user_business.id,
+        'business_name': user_business.business_name,
+        'business_address': user_business.business_address,
+        'business_email': user_business.business_email,
+        'business_website': user_business.business_website,
+        'business_description': user_business.business_description,
+        'business_industry': user_business.business_industry,
+        'business_category': user_business.business_category
+    })
+
+@business_routes.route('/<int:businessId>', methods=['GET'])
+@login_required
+def get_business(businessId):
+    business = Business.query.get(businessId)
+
+    if not business:
+        return jsonify({'error': 'Business not found'}), 404
+
+    return jsonify({
+        'id': business.id,
+        'business_name': business.business_name,
+        'business_address': business.business_address,
+        'business_email': business.business_email,
+        'business_website': business.business_website,
+        'business_description': business.business_description,
+        'business_industry': business.business_industry,
+        'business_category': business.business_category
+    })
 
 @business_routes.route('/create', methods=['POST'])
 @login_required
 def create_business():
-    form = business_form(request.form)
+    form = BusinessForm(request.form)
     
     if form.validate():
         existing_business = Business.query.filter_by(business_name=form.business_name.data).first()
