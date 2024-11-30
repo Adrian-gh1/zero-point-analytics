@@ -17,8 +17,8 @@ def seed():
         undo_businesses()
 
     # Seed Commands
-    seed_businesses()
     seed_users()
+    seed_businesses()
 
 @seed_commands.command('undo')
 def undo():
