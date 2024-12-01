@@ -3,8 +3,10 @@
 const GET_ALL_BUSINESSES = 'businesses/getAllBusinesses';
 const GET_USER_BUSINESS = 'businesses/getUserBusiness';
 const GET_BUSINESS = 'businesses/getBusiness';
-const EDIT_BUSINESS = 'businesses/editBusiness'; 
 const CREATE_BUSINESS = 'businesses/createBusiness';
+const EDIT_BUSINESS = 'businesses/editBusiness'; 
+const DELETE_BUSINESS = 'connections/deleteBusiness';
+
 const initialState = {
     businesses: [],
     selectedBusiness: null,
@@ -33,6 +35,13 @@ const actionGetBusiness = (data) => {
     };
 };
 
+const actionCreateBusiness = (data) => {
+    return {
+        type: CREATE_BUSINESS,
+        payload: data
+    };
+};
+
 const actionEditBusiness = (data) => {
     return {
         type: EDIT_BUSINESS,
@@ -40,10 +49,10 @@ const actionEditBusiness = (data) => {
     };
 };
 
-const actionCreateBusiness = (data) => {
+const actionDeleteBusiness = (connectionId) => {
     return {
-        type: CREATE_BUSINESS,
-        payload: data
+        type: DELETE_BUSINESS,
+        payload: connectionId
     };
 };
 
@@ -75,6 +84,17 @@ export const thunkGetBusiness = (businessId) => async (dispatch) => {
     return response;
 };
 
+export const thunkCreateBusiness = (businessData) => async (dispatch) => {
+    const response = await fetch('/api/businesses/create', {
+        method: 'POST',
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(businessData)
+    });
+    const data = await response.json();
+    dispatch(actionCreateBusiness(data));
+    return response;
+};
+
 export const thunkEditBusiness = (businessData) => async (dispatch) => {    
     const response = await fetch(`/api/businesses/edit`, {
         method: 'PATCH',
@@ -86,14 +106,12 @@ export const thunkEditBusiness = (businessData) => async (dispatch) => {
     return response;
 };
 
-export const thunkCreateBusiness = (businessData) => async (dispatch) => {
-    const response = await fetch('/api/businesses/all', {
-        method: 'POST',
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(businessData)
+export const thunkDeleteBusiness = (businessId) => async (dispatch) => {
+    const response = await fetch(`/api/businesses/delete/${businessId}`, {
+        method: 'DELETE'
     });
     const data = await response.json();
-    dispatch(actionCreateBusiness(data));
+    dispatch(actionDeleteBusiness(data));
     return response;
 };
 
@@ -106,10 +124,12 @@ function businessesReducer(state = initialState, action) {
             return { ...state, userBusiness: action.payload };
         case GET_BUSINESS:
             return { ...state, selectedBusiness: action.payload };
-        case EDIT_BUSINESS:
-            return { ...state, userBusiness: action.payload };
         case CREATE_BUSINESS:
             return { ...state, businesses: [...state.businesses, action.payload] };
+        case EDIT_BUSINESS:
+            return { ...state, userBusiness: action.payload };
+        case DELETE_BUSINESS:
+            return { ...state, userBusiness: null };
         default:
             return state;
     }
