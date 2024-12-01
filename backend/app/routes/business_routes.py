@@ -42,9 +42,7 @@ def get_user_business():
     if not business:
         return jsonify({'error': 'User does not have a business'}), 404
 
-    return jsonify({
-        'business': business.to_dict()
-    }), 200
+    return jsonify(business.to_dict()), 200
 
 # Get a Selected Business
 @business_routes.route('/<int:businessId>', methods=['GET'])
@@ -55,9 +53,7 @@ def get_business(businessId):
     if not business:
         return jsonify({'error': 'Business not found'}), 404
 
-    return jsonify({
-        'business': business.to_dict()
-    }), 200
+    return jsonify(business.to_dict()), 200
 
 # Create a Business
 @business_routes.route('/create', methods=['POST'])

@@ -23,9 +23,7 @@ def get_business_connection():
     if not connection:
         return jsonify({'error': 'No connections found for this user'}), 404
     
-    return jsonify({
-        'connection': connection.to_dict()
-    }), 200
+    return jsonify(connection.to_dict()), 200
 
 # Get a Selected Connection
 @connection_routes.route('/<int:connectionId>', methods=['GET'])
@@ -36,9 +34,7 @@ def get_connection(connectionId):
     if not connection:
         return jsonify({'error': 'Connection not found'}), 404
     
-    return jsonify({
-        'connection': connection.to_dict()
-    }), 200
+    return jsonify(connection.to_dict()), 200
 
 # Create a Connection
 @connection_routes.route('/create', methods=['POST'])

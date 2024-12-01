@@ -43,9 +43,7 @@ def get_business_service():
     if not service:
         return jsonify({'error': 'Business does not have a service'}), 404
 
-    return jsonify({
-        'service': service.to_dict()
-    }), 200
+    return jsonify(service.to_dict()), 200
 
 # Get a Selected Service
 @service_routes.route('/<int:serviceId>', methods=['GET'])
@@ -56,9 +54,7 @@ def get_business(serviceId):
     if not service:
         return jsonify({'error': 'Service not found'}), 404
 
-    return jsonify({
-        'service': service.to_dict()
-    }), 200
+    return jsonify(service.to_dict()), 200
 
 # Create a Service
 @service_routes.route('/create', methods=['POST'])
