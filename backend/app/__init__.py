@@ -15,6 +15,8 @@ from app.seeds import seed_commands
 from app.routes import auth_routes
 from app.routes import user_routes
 from app.routes import business_routes
+from app.routes import service_routes
+from app.routes import connection_routes
 
 app = Flask(__name__, static_folder="../../frontend/dist", static_url_path="/")
 
@@ -31,6 +33,8 @@ app.config.from_object(Configuration)
 app.register_blueprint(auth_routes, url_prefix='/api/auth')
 app.register_blueprint(user_routes, url_prefix='/api/users')
 app.register_blueprint(business_routes, url_prefix='/api/businesses')
+app.register_blueprint(service_routes, url_prefix='/api/services')
+app.register_blueprint(connection_routes, url_prefix='/api/connections')
 db.init_app(app)
 Migrate(app, db)
 
