@@ -14,6 +14,18 @@ def get_all_connections():
 
     return jsonify([connection.to_dict() for connection in connections]), 200
 
+# Get All Business Connections
+@connection_routes.route('/allBusinessConnections', methods=['GET'])
+@login_required
+def get_all_business_connections():
+    connections = Connection.query.filter_by(user_id=current_user.id).all()
+   
+    if not connections:
+        return jsonify({'error': 'Business does not have any connections'}), 404
+
+    connections_list = [connection.to_dict() for connection in connections]
+    return jsonify(connections_list), 200
+
 # Get a Business Connection
 @connection_routes.route('/businessConnection', methods=['GET'])
 @login_required

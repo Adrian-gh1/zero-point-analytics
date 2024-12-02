@@ -45,12 +45,12 @@ function LoginFormPage() {
     };
 
     return (
-        <div>
-            <form onSubmit={handleSubmit}>
+        <div className="login-form-container">
+            <form className="login-form" onSubmit={handleSubmit}>
                 
-                {error && <div className="error">{error}</div>}
+                {error && <div className="login-error">{error}</div>}
 
-                <div>
+                <div className="login-input-group">
                     <label htmlFor="email">Email:</label>
                     <input 
                         type="email" 
@@ -59,10 +59,11 @@ function LoginFormPage() {
                         value={email} 
                         onChange={(e) => setEmail(e.target.value)} 
                         required 
+                        className="login-input"
                     />
                 </div>
                 
-                <div>
+                <div className="login-input-group">
                     <label htmlFor="password">Password:</label>
                     <input 
                         type="password" 
@@ -71,20 +72,20 @@ function LoginFormPage() {
                         value={password} 
                         onChange={(e) => setPassword(e.target.value)} 
                         required 
+                        className="login-input"
                     />
                 </div>
 
-                <button type="submit">Login</button>
+                <button type="submit" className="login-submit-button">Login</button>
             </form>
 
-            <div className="demo-login">
-                <button onClick={demoLoginHandler}>Demo Login</button>
+            <div className="demo-login-container">
+                <button onClick={demoLoginHandler} className="demo-login-button">Demo Login</button>
             </div>
 
-            <div>
+            {/* <div className="login-footer">
                 Have an Account? Login
-            </div>
-
+            </div> */}
         </div>
     )
 }

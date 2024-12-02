@@ -38,58 +38,68 @@ function ServiceFormPage() {
     };
 
     return (
-        <div className="service-form-page">
-            <h3>New Service Form</h3>
-            <form onSubmit={handleSubmit}>
-                <div>
-                    <label>Service Name:</label>
+        <div className="service-form-container">
+            <h3 className="service-form-heading">New Service Form</h3>
+            <form className="service-form" onSubmit={handleSubmit}>
+                <div className="service-input-group">
+                    <label htmlFor="service_name" className="service-label">Service Name:</label>
                     <input
                         type="text"
                         name="service_name"
+                        id="service_name"
                         value={newService.service_name}
                         onChange={handleChange}
+                        className="service-input"
                     />
                 </div>
-                <div>
-                    <label>Service Industry:</label>
+                <div className="service-input-group">
+                    <label htmlFor="service_industry" className="service-label">Service Industry:</label>
                     <input
                         type="text"
                         name="service_industry"
+                        id="service_industry"
                         value={newService.service_industry}
                         onChange={handleChange}
+                        className="service-input"
                     />
                 </div>
-                <div>
-                    <label>Service Description:</label>
+                <div className="service-input-group">
+                    <label htmlFor="service_description" className="service-label">Service Description:</label>
                     <input
                         type="text"
                         name="service_description"
+                        id="service_description"
                         value={newService.service_description}
                         onChange={handleChange}
+                        className="service-input"
                     />
                 </div>
-                <div>
-                    <label>Service Type:</label>
+                <div className="service-input-group">
+                    <label htmlFor="service_type" className="service-label">Service Type:</label>
                     <select
                         name="service_type"
+                        id="service_type"
                         value={newService.service_type}
                         onChange={handleChange}
+                        className="service-select"
                     >
                         <option value="">Select a service type</option>
                         <option value="Offer">Offer</option>
                         <option value="Request">Request</option>
                     </select>
                 </div>
-                <div>
-                    <label>Service Tags:</label>
+                <div className="service-input-group">
+                    <label htmlFor="service_tags" className="service-label">Service Tags:</label>
                     <input
                         type="text"
                         name="service_tags"
+                        id="service_tags"
                         value={newService.service_tags}
                         onChange={handleChange}
+                        className="service-input"
                     />
                 </div>
-                <button type="submit">Create Service</button>
+                <button type="submit" className="service-submit-button">Create Service</button>
             </form>
         </div>
     );

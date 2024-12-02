@@ -20,7 +20,7 @@ function Navigation() {
             </div>
 
             <div className="search-bar">
-                <input type="text" placeholder="Search..." />
+                {/* <input type="text" placeholder="Search..." /> */}
             </div>
 
             <div>

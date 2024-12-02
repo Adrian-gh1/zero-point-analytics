@@ -1,12 +1,11 @@
-/* Body Background */
-body {
+/* Container wrapper for scoped styles */
+.business-portfolio-page {
     background-color: #2e2e2e; /* Slightly lighter dark gray */
     color: #f5f5f5; /* Light text color for readability */
     font-family: 'Arial', sans-serif;
 }
 
-/* Background section for portfolio content */
-.portfolio-background {
+.business-portfolio-page .portfolio-background {
     background-color: #3e3e3e; /* Medium-dark gray for contrast */
     padding: 20px;
     border-radius: 10px;
@@ -14,15 +13,13 @@ body {
     margin: 20px 0; /* Adds space above and below */
 }
 
-/* Top Section Layout */
-.top {
+.business-portfolio-page .top {
     display: flex;
     justify-content: space-between;
     margin-bottom: 20px;
 }
 
-/* Left Section in the Top */
-.top-left {
+.business-portfolio-page .top-left {
     width: 30%;
     background-color: #4a4a4a; /* Dark gray */
     padding: 15px;
@@ -31,8 +28,7 @@ body {
     box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
 }
 
-/* Center Section in the Top */
-.top-center {
+.business-portfolio-page .top-center {
     width: 35%;
     padding: 15px;
     background-color: #3e3e3e; /* Medium-dark gray */
@@ -40,14 +36,13 @@ body {
     box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
 }
 
-.top-center div {
+.business-portfolio-page .top-center div {
     margin-bottom: 12px;
     font-size: 1.0em;
     color: #f5f5f5; /* Light color for text */
 }
 
-/* Right Section in the Top */
-.top-right {
+.business-portfolio-page .top-right {
     width: 30%;
     background-color: #4a4a4a; /* Dark gray */
     padding: 15px;
@@ -55,14 +50,13 @@ body {
     box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
 }
 
-.top-right div {
+.business-portfolio-page .top-right div {
     margin-bottom: 12px;
     font-size: 1.0em;
     color: #f5f5f5; /* Light color for text */
 }
 
-/* Middle Section Layout */
-.middle {
+.business-portfolio-page .middle {
     padding: 20px;
     margin-top: 20px;
     background-color: #5a5a5a; /* Soft gray */
@@ -72,22 +66,18 @@ body {
     color: #f5f5f5; /* Light color for text */
 }
 
-/* Bottom Section Layout */
-.bottom {
+.business-portfolio-page .bottom {
     margin-top: 30px;
 }
 
-/* Right Section of the Bottom (Buttons) */
-.bottom-right {
+.business-portfolio-page .bottom-right {
     display: flex;
     justify-content: flex-end;
     gap: 15px;
 }
 
-/* Button Styles */
-button {
+.business-portfolio-page button {
     padding: 12px 20px;
-    /* font-size: 1em; */
     cursor: pointer;
     border: none;
     border-radius: 5px;
@@ -95,13 +85,11 @@ button {
     transition: background-color 0.3s, color 0.3s;
 }
 
-/* Button Hover Effects */
-button:hover {
+.business-portfolio-page button:hover {
     opacity: 0.8;
 }
 
-/* Disabled Button Styles */
-button:disabled {
+.business-portfolio-page button:disabled {
     filter: grayscale(100%) brightness(70%);
     background-color: #7f8c8d;
     color: #bdc3c7;
@@ -109,39 +97,35 @@ button:disabled {
     opacity: 0.6;
 }
 
-/* Specific Button Styles */
-button:first-child {
+.business-portfolio-page button:first-child {
     background-color: #3498db; /* Bright blue */
     color: white;
 }
 
-button:nth-child(2) {
+.business-portfolio-page button:nth-child(2) {
     background-color: #2c3e50; /* Deep blue-gray */
     color: white;
 }
 
-button:nth-child(3) {
+.business-portfolio-page button:nth-child(3) {
     background-color: #27ae60; /* Dark green */
     color: white;
 }
 
-/* Additional Styling for Text and Elements */
-h2, h4 {
+.business-portfolio-page h2, .business-portfolio-page h4 {
     color: #f5f5f5; /* Light color for headers */
 }
 
-/* Section headers */
-h4 {
+.business-portfolio-page h4 {
     border-bottom: 2px solid #3498db; /* Blue underline */
     padding-bottom: 5px;
 }
 
-/* Links */
-a {
+.business-portfolio-page a {
     color: #1abc9c; /* Teal */
     text-decoration: none;
 }
 
-a:hover {
+.business-portfolio-page a:hover {
     text-decoration: underline;
 }

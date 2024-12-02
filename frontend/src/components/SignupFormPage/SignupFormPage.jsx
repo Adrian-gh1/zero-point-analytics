@@ -69,6 +69,7 @@ function SignupFormPage() {
         }
         
         else {
+            // NOTE: Should Navigate to Creating a Business
             navigate('/');
         }
     };
@@ -86,87 +87,93 @@ function SignupFormPage() {
     return (
         // <div>Sign Up Page</div>
         <div className="signup-form-container">
-            <h2>Zero Point</h2>
+            <h2 className="signup-form-heading">Create Account</h2>
             <form onSubmit={handleSubmit} className="signup-form">
-                <div className="form-group">
-                    <label htmlFor="username">Username</label>
+                <div className="signup-form-group">
+                    <label htmlFor="username" className="signup-label">Username</label>
                     <input
-                    type="text"
-                    id="username"
-                    name="username"
-                    value={formData.username}
-                    onChange={handleChange}
-                    required
+                        type="text"
+                        id="username"
+                        name="username"
+                        value={formData.username}
+                        onChange={handleChange}
+                        className="signup-input"
+                        required
                     />
-                    {errors.username && <p className="error">{errors.username}</p>}
+                    {errors.username && <p className="signup-error">{errors.username}</p>}
                 </div>
 
-                <div className="form-group">
-                    <label htmlFor="email">Email</label>
+                <div className="signup-form-group">
+                    <label htmlFor="email" className="signup-label">Email</label>
                     <input
-                    type="email"
-                    id="email"
-                    name="email"
-                    value={formData.email}
-                    onChange={handleChange}
-                    required
+                        type="email"
+                        id="email"
+                        name="email"
+                        value={formData.email}
+                        onChange={handleChange}
+                        className="signup-input"
+                        required
                     />
-                    {errors.email && <p className="error">{errors.email}</p>}
+                    {errors.email && <p className="signup-error">{errors.email}</p>}
                 </div>
 
-                <div className="form-group">
-                    <label htmlFor="password">Password</label>
+                <div className="signup-form-group">
+                    <label htmlFor="password" className="signup-label">Password</label>
                     <input
-                    type="password"
-                    id="password"
-                    name="password"
-                    value={formData.password}
-                    onChange={handleChange}
-                    required
+                        type="password"
+                        id="password"
+                        name="password"
+                        value={formData.password}
+                        onChange={handleChange}
+                        className="signup-input"
+                        required
                     />
-                    {errors.password && <p className="error">{errors.password}</p>}
+                    {errors.password && <p className="signup-error">{errors.password}</p>}
                 </div>
 
-                <div className="form-group">
-                    <label htmlFor="firstName">First Name</label>
+                <div className="signup-form-group">
+                    <label htmlFor="firstName" className="signup-label">First Name</label>
                     <input
-                    type="text"
-                    id="firstName"
-                    name="firstName"
-                    value={formData.firstName}
-                    onChange={handleChange}
-                    required
+                        type="text"
+                        id="firstName"
+                        name="firstName"
+                        value={formData.firstName}
+                        onChange={handleChange}
+                        className="signup-input"
+                        required
                     />
-                    {errors.firstName && <p className="error">{errors.firstName}</p>}
+                    {errors.firstName && <p className="signup-error">{errors.firstName}</p>}
                 </div>
 
-                <div className="form-group">
-                    <label htmlFor="lastName">Last Name</label>
+                <div className="signup-form-group">
+                    <label htmlFor="lastName" className="signup-label">Last Name</label>
                     <input
-                    type="text"
-                    id="lastName"
-                    name="lastName"
-                    value={formData.lastName}
-                    onChange={handleChange}
-                    required
+                        type="text"
+                        id="lastName"
+                        name="lastName"
+                        value={formData.lastName}
+                        onChange={handleChange}
+                        className="signup-input"
+                        required
                     />
-                    {errors.lastName && <p className="error">{errors.lastName}</p>}
+                    {errors.lastName && <p className="signup-error">{errors.lastName}</p>}
                 </div>
 
-                <div className="form-group">
-                    <label htmlFor="role">Role</label>
+                <div className="signup-form-group">
+                    <label htmlFor="role" className="signup-label">Role</label>
                     <input
-                    type="text"
-                    id="role"
-                    name="role"
-                    value={formData.role}
-                    onChange={handleChange}
-                    required
+                        type="text"
+                        id="role"
+                        name="role"
+                        value={formData.role}
+                        onChange={handleChange}
+                        className="signup-input"
+                        required
                     />
-                    {errors.role && <p className="error">{errors.role}</p>}
+                    {errors.role && <p className="signup-error">{errors.role}</p>}
                 </div>
 
-                <button type="submit">Continue</button>
+                <button type="submit" className="signup-submit-button">Continue</button>
             </form>
         </div>
         

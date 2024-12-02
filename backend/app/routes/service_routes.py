@@ -39,7 +39,7 @@ def get_all_services():
 # Get All Business Services
 @service_routes.route('/allBusinessServices', methods=['GET'])
 @login_required
-def get_all_business_service():
+def get_all_business_services():
     services = Service.query.filter_by(user_id=current_user.id).all()
    
     if not services:
@@ -47,7 +47,6 @@ def get_all_business_service():
 
     services_list = [service.to_dict() for service in services]
     return jsonify(services_list), 200
-    # return jsonify({'services': services_list}), 200
 
 # Get a Business Service
 @service_routes.route('/businessService', methods=['GET'])

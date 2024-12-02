@@ -1,6 +1,7 @@
 // frontend/src/redux/connections.js
 
 const GET_ALL_CONNECTIONS = 'connections/getAllConnections';
+const GET_ALL_BUSINESS_CONNECTIONS = 'services/getAllBusinessConnections';
 const GET_BUSINESS_CONNECTION = 'connections/getBusinessConnection';
 const GET_CONNECTION = 'connections/getConnection';
 const CREATE_CONNECTION = 'connections/createConnection';
@@ -9,6 +10,7 @@ const DELETE_CONNECTION = 'connections/deleteConnection';
 
 const initialState = {
     connections: [],
+    allBusinessConnections: [],
     selectedConnection: null,
     businessConnection: {}
 };
@@ -17,6 +19,13 @@ const initialState = {
 const actionGetAllConnections = (data) => {
     return {
         type: GET_ALL_CONNECTIONS,
+        payload: data
+    };
+};
+
+const actionGetAllBusinessConnections = (data) => {
+    return {
+        type: GET_ALL_BUSINESS_CONNECTIONS,
         payload: data
     };
 };
@@ -63,6 +72,15 @@ export const thunkGetAllConnections = () => async (dispatch) => {
     });
     const data = await response.json();
     dispatch(actionGetAllConnections(data));
+    return response;
+};
+
+export const thunkGetAllBusinessConnections  = () => async (dispatch) => {
+    const response = await fetch('/api/connections/allBusinessConnections', {
+        method: 'GET'
+    });
+    const data = await response.json();
+    dispatch(actionGetAllBusinessConnections(data));
     return response;
 };
 
@@ -120,6 +138,8 @@ function connectionsReducer(state = initialState, action) {
     switch (action.type) {
         case GET_ALL_CONNECTIONS:
             return { ...state, connections: action.payload };
+        case GET_ALL_BUSINESS_CONNECTIONS:
+            return {...state, allBusinessConnections: action.payload}
         case GET_BUSINESS_CONNECTION:
             return { ...state, businessConnection: action.payload };
         case GET_CONNECTION:

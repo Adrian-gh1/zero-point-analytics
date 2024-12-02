@@ -1,45 +1,53 @@
 // frontend/src/components/ServiceDetailsPage/ServiceDetailsPage.jsx
 
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { thunkGetBusiness, thunkGetUserBusiness } from '../../redux/businesses';
 import { thunkGetService, thunkGetBusinessService } from '../../redux/services';
-import { thunkCreateConnection } from '../../redux/connections';
+import { thunkCreateConnection, thunkGetAllBusinessConnections, thunkDeleteConnection } from '../../redux/connections';
 import './ServiceDetailsPage.css';
 
 function ServiceDetailsPage() {
     const dispatch = useDispatch();
-    const selectedBusiness = useSelector(state => state.businesses.selectedBusiness);
-    const userBusiness = useSelector(state => state.businesses.userBusiness);
-    const selectedService = useSelector(state => state.services.selectedService)
-    const businessService = useSelector(state => state.services.businessService)
     const { serviceId } = useParams();
 
-    // useEffect(() => {
-    //     dispatch(thunkGetBusiness(businessId));
-    //     dispatch(thunkGetUserBusiness());
-    //     dispatch(thunkGetService(serviceId));
-    //     dispatch(thunkGetBusinessService());
-    // }, [dispatch, businessId]);
+    const selectedBusiness = useSelector(state => state.businesses.selectedBusiness);
+    const userBusiness = useSelector(state => state.businesses.userBusiness);
+    const selectedService = useSelector(state => state.services.selectedService);
+    const businessService = useSelector(state => state.services.businessService);
+    const allBusinessConnections = useSelector(state => state.connections.allBusinessConnections);
 
-    // Fetch service and user business data
+    const [isButtonDisabled, setIsButtonDisabled] = useState(false);
+
     useEffect(() => {
         if (serviceId) {
             dispatch(thunkGetService(serviceId));
         }
     }, [dispatch, serviceId]);
 
-     // Fetch business data when selectedService changes
+    useEffect(() => {
+        if (userBusiness) {
+            dispatch(thunkGetAllBusinessConnections());
+        }
+    }, [dispatch, userBusiness]);
+
+    useEffect(() => {
+        if (allBusinessConnections && serviceId) {
+            const connectionExists = allBusinessConnections.some(connection => connection.service_id === parseInt(serviceId));
+            setIsButtonDisabled(connectionExists);
+        }
+    }, [allBusinessConnections, serviceId]);
+
      useEffect(() => {
         if (selectedService) {
             const businessId = selectedService.business_id;
             if (businessId) {
                 dispatch(thunkGetBusiness(businessId));
-                dispatch(thunkGetBusinessService()); // Assuming this fetches data related to the service's business
+                dispatch(thunkGetBusinessService());
             }
-            dispatch(thunkGetUserBusiness()); // Fetch user business data
+            dispatch(thunkGetUserBusiness());
         }
     }, [dispatch, selectedService]);
 
@@ -47,8 +55,9 @@ function ServiceDetailsPage() {
         return <div>Loading data...</div>;
     }
 
-    const handleSendConnection = async () => {
+    const sendConnectionHandler = async () => {
         const connectionData = {
+            service_id: serviceId,
             business_id_1: userBusiness.id, // Your business ID
             business_id_2: selectedBusiness.id, // Selected business ID
             connection_type: 'Partnership', // Modify as needed
@@ -57,17 +66,23 @@ function ServiceDetailsPage() {
         };
 
         await dispatch(thunkCreateConnection(connectionData));
+        await dispatch(thunkGetAllBusinessConnections());
+    };
 
-    }
+    const deleteButtonHandler = async (connectionId) => {
+        await dispatch(thunkDeleteConnection(connectionId));
+        await dispatch(thunkGetAllBusinessConnections());
+    };
 
     return (
         <div>
             <div className="business-comparison-container">
                 <div className="business-comparison">
                     <div className="business-column">
-                        <h3>Selected Business: {selectedBusiness.business_name}</h3>
+                        {/* <h3>Selected Business: {selectedBusiness.business_name}</h3> */}
+                        <h3>{selectedBusiness.business_name}</h3>
                         <div className="business-detail">
-                            <strong>Name:</strong> {selectedBusiness.business_name}
+                            {/* <strong>Name:</strong> {selectedBusiness.business_name} */}
                         </div>
                         <div className="business-detail">
                             <strong>Address:</strong> {selectedBusiness.business_address}
@@ -90,15 +105,24 @@ function ServiceDetailsPage() {
                     </div>
 
                     <div className="button-container">
-                        <button className="action-button" onClick={handleSendConnection}>Send Connection</button>
-                        <button className="action-button">Edit Details</button>
-                        <button className="action-button">Cancellation Request</button>
+                        <button className="action-button" onClick={sendConnectionHandler} disabled={isButtonDisabled}>Send Connection</button>
+                        {/* <button className="action-button">Edit Details</button> */}
+
+                        {allBusinessConnections.map((connection) => (
+                            connection.service_id === parseInt(serviceId) && (
+                                <button key={connection.id} className="action-button" onClick={() => deleteButtonHandler(connection.id)}>
+                                    Cancellation Request
+                                </button>
+                            )
+                        ))}
+
                     </div>
 
                     <div className="business-column">
-                        <h3>Your Business: {userBusiness.business_name}</h3>
+                        {/* <h3>Your Business: {userBusiness.business_name}</h3> */}
+                        <h3>{userBusiness.business_name}</h3>
                         <div className="business-detail">
-                            <strong>Name:</strong> {userBusiness.business_name}
+                            {/* <strong>Name:</strong> {userBusiness.business_name} */}
                         </div>
                         <div className="business-detail">
                             <strong>Address:</strong> {userBusiness.business_address}
@@ -118,6 +142,9 @@ function ServiceDetailsPage() {
                         <div className="business-detail">
                             <strong>Category:</strong> {userBusiness.business_category}
                         </div>
+                        {/* <div className="business-detail">
+
+                        </div> */}
                     </div>
 
                 </div>

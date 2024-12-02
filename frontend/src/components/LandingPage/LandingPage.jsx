@@ -61,9 +61,9 @@ function LandingPage() {
         // </div>
 
         <div className="landing-page-container">
-            <div className="landing-page-header"><h2>Landing Page</h2></div>
-            <div className="filter-bar">Filter Bar</div>
-            <h2>Company List</h2>
+            {/* <div className="landing-page-header"><h2>Landing Page</h2></div> */}
+            {/* <div className="filter-bar">Filter Bar</div> */}
+            {/* <h2>Company List</h2> */}
             <div className="business-list">
                 {services.map((service) => (
                     <div
