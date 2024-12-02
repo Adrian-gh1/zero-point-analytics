@@ -12,7 +12,7 @@ function ProfileMenu() {
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const sessionUser = useSelector(state => state.session.user);
-    const userBusiness = useSelector(state => state.businesses.userBusiness)        
+    // const userBusiness = useSelector(state => state.businesses.userBusiness)        
 
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const profileRef = useRef(null);

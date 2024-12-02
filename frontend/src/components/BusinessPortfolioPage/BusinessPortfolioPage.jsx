@@ -121,152 +121,154 @@ function BusinessPortfolioPage() {
 
 
     return (
-        <div>
-            <h2>Business Portfolio Page</h2>
+        <div className="business-portfolio-page">
+            <div>
+                <h2>Business Portfolio Page</h2>
 
-            <div className="portfolio-background">
-            {/* <div> */}
-                {/* {allBusinessServices && allBusinessServices.length > 0 ? ( */}
-                    {allBusinessServices.map((service) => (
-                        <div key={service.id}>
-                            <div className='top'>
-                                
-                                <div className='top-left'>Business Logo</div>
-
-                                <div className='top-center'>
-                                    <div>My Business</div>
-
-                                    <div>
-                                        {editMode ? (
-                                            <div>
-                                                <div>
-                                                    Business Name:
-                                                    <input
-                                                        type="text"
-                                                        name="business_name"
-                                                        value={businessName}
-                                                        onChange={(e) => editServiceChangeHandler(e, service.id)}
-                                                    />
-                                                </div>
-
-                                                <div>
-                                                    Business Address:
-                                                    <input
-                                                        type="text"
-                                                        name="business_address"
-                                                        value={businessAddress}
-                                                        onChange={editBusinessChangeHandler}
-                                                    />
-                                                </div>
-
-                                                <div>
-                                                    Business Email:
-                                                    <input
-                                                        type="text"
-                                                        name="business_email"
-                                                        value={businessEmail}
-                                                        onChange={editBusinessChangeHandler}
-                                                    />
-                                                </div>
-
-                                                <div>
-                                                    Business Industry:
-                                                    <input
-                                                        type="text"
-                                                        name="business_industry"
-                                                        value={businessIndustry}
-                                                        onChange={editBusinessChangeHandler}
-                                                    />
-                                                </div>
-
-                                                <div>
-                                                    Business Category:
-                                                    <input
-                                                        type="text"
-                                                        name="business_category"
-                                                        value={businessCategory}
-                                                        onChange={editBusinessChangeHandler}
-                                                    />
-                                                </div>
-
-                                                <div>Connection Status: {businessConnection.connection_status}</div>
-                                                <div>Connection Type: {businessConnection.connection_type}</div>
-
-
-                                            </div>                                        
-
-                                        ) : (
-                                            <div>
-                                                <div>Business Name: {userBusiness.business_name}</div>
-                                                <div>Business Address: {userBusiness.business_address}</div>
-                                                <div>Business Email: {userBusiness.business_email}</div>
-                                                <div>Business Industry: {userBusiness.business_industry}</div>
-                                                <div>Business Category: {userBusiness.business_category}</div>
-                                                <div>Connection Status: {businessConnection.connection_status}</div>
-                                                <div>Connection Type: {businessConnection.connection_type}</div>
-                                            </div>
-                                        )}
-                                    </div> 
+                <div className="portfolio-background">
+                {/* <div> */}
+                    {/* {allBusinessServices && allBusinessServices.length > 0 ? ( */}
+                        {allBusinessServices.map((service) => (
+                            <div key={service.id}>
+                                <div className='top'>
                                     
+                                    <div className='top-left'>Business Logo</div>
+
+                                    <div className='top-center'>
+                                        <div>My Business</div>
+
+                                        <div>
+                                            {editMode ? (
+                                                <div>
+                                                    <div>
+                                                        Business Name:
+                                                        <input
+                                                            type="text"
+                                                            name="business_name"
+                                                            value={businessName}
+                                                            onChange={(e) => editServiceChangeHandler(e, service.id)}
+                                                        />
+                                                    </div>
+
+                                                    <div>
+                                                        Business Address:
+                                                        <input
+                                                            type="text"
+                                                            name="business_address"
+                                                            value={businessAddress}
+                                                            onChange={editBusinessChangeHandler}
+                                                        />
+                                                    </div>
+
+                                                    <div>
+                                                        Business Email:
+                                                        <input
+                                                            type="text"
+                                                            name="business_email"
+                                                            value={businessEmail}
+                                                            onChange={editBusinessChangeHandler}
+                                                        />
+                                                    </div>
+
+                                                    <div>
+                                                        Business Industry:
+                                                        <input
+                                                            type="text"
+                                                            name="business_industry"
+                                                            value={businessIndustry}
+                                                            onChange={editBusinessChangeHandler}
+                                                        />
+                                                    </div>
+
+                                                    <div>
+                                                        Business Category:
+                                                        <input
+                                                            type="text"
+                                                            name="business_category"
+                                                            value={businessCategory}
+                                                            onChange={editBusinessChangeHandler}
+                                                        />
+                                                    </div>
+
+                                                    <div>Connection Status: {businessConnection.connection_status}</div>
+                                                    <div>Connection Type: {businessConnection.connection_type}</div>
+
+
+                                                </div>                                        
+
+                                            ) : (
+                                                <div>
+                                                    <div>Business Name: {userBusiness.business_name}</div>
+                                                    <div>Business Address: {userBusiness.business_address}</div>
+                                                    <div>Business Email: {userBusiness.business_email}</div>
+                                                    <div>Business Industry: {userBusiness.business_industry}</div>
+                                                    <div>Business Category: {userBusiness.business_category}</div>
+                                                    <div>Connection Status: {businessConnection.connection_status}</div>
+                                                    <div>Connection Type: {businessConnection.connection_type}</div>
+                                                </div>
+                                            )}
+                                        </div> 
+                                        
+                                    </div>
+
+                                    <div className='top-right'>
+                                        <div>Connected Business</div>
+
+                                        <div>Connected Business Name: {selectedBusiness?.business_name}</div>
+                                        <div>Connected Contact Info: {selectedBusiness?.business_email}</div>
+                                        <div>Connected Business Industry: {selectedBusiness?.business_industry}</div>
+
+                                        <div>
+                                            <button>Connection Details</button>
+                                        </div>
+                                    </div>
+
                                 </div>
 
-                                <div className='top-right'>
-                                    <div>Connected Business</div>
-
-                                    <div>Connected Business Name: {selectedBusiness?.business_name}</div>
-                                    <div>Connected Contact Info: {selectedBusiness?.business_email}</div>
-                                    <div>Connected Business Industry: {selectedBusiness?.business_industry}</div>
-
-                                    <div>
-                                        <button>Connection Details</button>
-                                    </div>
-                                </div>
-
-                            </div>
-
-                            <div className='middle'>
-                                {editMode ? (
-                                    <div>
-                                        Service Description:
-                                        <input
-                                            type="text"
-                                            name="service_description"
-                                            value={updateService[service.id] ? updateService[service.id].service_description : service.service_description}
-
-                                            onChange={(e) => editServiceChangeHandler(e, service.id)}
-                                        />
-                                    </div>
-                                ) : (
-                                    <div>Service Description: {service.service_description}</div>
-                                )}
-
-                            </div>
-
-                            <div className='bottom'>
+                                <div className='middle'>
                                     {editMode ? (
-                                        <div className='bottom-right'>
-                                                <button onClick={saveButtonHandler}>Save Changes</button>                                    
+                                        <div>
+                                            Service Description:
+                                            <input
+                                                type="text"
+                                                name="service_description"
+                                                value={updateService[service.id] ? updateService[service.id].service_description : service.service_description}
+
+                                                onChange={(e) => editServiceChangeHandler(e, service.id)}
+                                            />
                                         </div>
                                     ) : (
-                                        <div className='bottom-right'>
-                                                <button onClick={(e) => deleteButtonHandler(e, service.id)}>Delete Service</button>
-                                                <button onClick={editButtonHandler}>Edit Details</button>
-                                                <button onClick={(e) => publishButtonHandler(e, service.id)} disabled={service.service_live}>Advertise</button>
-                                        </div>
-                                    )}              
-                            </div>
+                                        <div>Service Description: {service.service_description}</div>
+                                    )}
 
-                        </div>                                
-                    ))}
+                                </div>
+
+                                <div className='bottom'>
+                                        {editMode ? (
+                                            <div className='bottom-right'>
+                                                    <button onClick={saveButtonHandler}>Save Changes</button>                                    
+                                            </div>
+                                        ) : (
+                                            <div className='bottom-right'>
+                                                    <button onClick={(e) => deleteButtonHandler(e, service.id)}>Delete Service</button>
+                                                    <button onClick={editButtonHandler}>Edit Details</button>
+                                                    <button onClick={(e) => publishButtonHandler(e, service.id)} disabled={service.service_live}>Advertise</button>
+                                            </div>
+                                        )}              
+                                </div>
+
+                            </div>                                
+                        ))}
+                </div>
+
+                <div>
+                    <button onClick={createServiceHandler}>
+                        + <br />
+                        Add Service/Request
+                    </button>
+                </div>
+
             </div>
-
-            <div>
-                <button onClick={createServiceHandler}>
-                    + <br />
-                    Add Service/Request
-                </button>
-            </div>
-
         </div>
     );
 }
