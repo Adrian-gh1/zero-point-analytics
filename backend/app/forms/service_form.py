@@ -1,7 +1,7 @@
 # backend/app/forms/service_form.py
 
 from flask_wtf import FlaskForm
-from wtforms import StringField, TextAreaField, SelectField, FieldList, FormField
+from wtforms import StringField, TextAreaField, SelectField, FieldList, FormField, BooleanField
 from wtforms.validators import DataRequired, Length, Optional, ValidationError
 from app.models import Service
 
@@ -32,4 +32,13 @@ class ServiceForm(FlaskForm):
         # DataRequired(message='Service Tags are required'),
         Optional(),
         Length(max=255, message='Service Tags should be less than 255 characters')
+    ])
+
+    service_live = BooleanField('Service Live', default=False, validators=[
+        DataRequired(message='Service Live status is required')
+    ])
+    
+    service_industry = StringField('Service Industry', validators=[
+        Optional(),
+        Length(max=255, message='Service Industry should be less than 255 characters')
     ])

@@ -7,7 +7,9 @@ data_services = [
         "service_name": "Espresso",
         "service_description": "Rich, bold espresso brewed to perfection.",
         "service_type": "Coffee",
-        "service_tags": "espresso, coffee, hot"
+        "service_tags": "espresso, coffee, hot",
+        "service_live": True,
+        "service_industry": "Food & Beverage"
     },
     {
         "user_id": 2,
@@ -15,7 +17,9 @@ data_services = [
         "service_name": "Laptop Repair",
         "service_description": "Expert repair services for all types of laptops.",
         "service_type": "Tech Support",
-        "service_tags": "repair, laptop, tech"
+        "service_tags": "repair, laptop, tech",
+        "service_live": True,
+        "service_industry": "Technology"
     },
     {
         "user_id": 3,
@@ -23,7 +27,9 @@ data_services = [
         "service_name": "Book Ordering",
         "service_description": "Order any book from our extensive catalog.",
         "service_type": "Retail",
-        "service_tags": "books, ordering, catalog"
+        "service_tags": "books, ordering, catalog",
+        "service_live": True,
+        "service_industry": "Retail"
     },
     {
         "user_id": 4,
@@ -31,7 +37,9 @@ data_services = [
         "service_name": "Personal Styling",
         "service_description": "Fashion advice and personal styling services.",
         "service_type": "Fashion",
-        "service_tags": "styling, fashion, consultation"
+        "service_tags": "styling, fashion, consultation",
+        "service_live": True,
+        "service_industry": "Fashion & Beauty"
     },
     {
         "user_id": 5,
@@ -39,7 +47,9 @@ data_services = [
         "service_name": "Fresh Produce Delivery",
         "service_description": "Delivery of fresh fruits and vegetables right to your door.",
         "service_type": "Grocery",
-        "service_tags": "delivery, fresh, produce"
+        "service_tags": "delivery, fresh, produce",
+        "service_live": True,
+        "service_industry": "Food & Beverage"
     },
     {
         "user_id": 6,
@@ -47,7 +57,9 @@ data_services = [
         "service_name": "Dinner Special",
         "service_description": "A special dinner menu with seasonal dishes.",
         "service_type": "Restaurant",
-        "service_tags": "special, dinner, seasonal"
+        "service_tags": "special, dinner, seasonal",
+        "service_live": True,
+        "service_industry": "Food & Beverage"
     },
     {
         "user_id": 7,
@@ -55,7 +67,9 @@ data_services = [
         "service_name": "Personal Training",
         "service_description": "One-on-one personal training to meet your fitness goals.",
         "service_type": "Fitness",
-        "service_tags": "personal training, fitness, health"
+        "service_tags": "personal training, fitness, health",
+        "service_live": True,
+        "service_industry": "Health & Fitness"
     },
     {
         "user_id": 8,
@@ -63,7 +77,9 @@ data_services = [
         "service_name": "Hair Color",
         "service_description": "Color your hair with a variety of shades and styles.",
         "service_type": "Salon",
-        "service_tags": "color, hair, beauty"
+        "service_tags": "color, hair, beauty",
+        "service_live": True,
+        "service_industry": "Beauty"
     },
     {
         "user_id": 9,
@@ -71,7 +87,9 @@ data_services = [
         "service_name": "Pet Grooming",
         "service_description": "Grooming services for all kinds of pets.",
         "service_type": "Pet Care",
-        "service_tags": "grooming, pets, care"
+        "service_tags": "grooming, pets, care",
+        "service_live": True,
+        "service_industry": "Pet Services"
     },
     {
         "user_id": 10,
@@ -79,6 +97,8 @@ data_services = [
         "service_name": "Wedding Bouquet",
         "service_description": "Custom wedding bouquets designed to match your theme.",
         "service_type": "Flowers",
-        "service_tags": "wedding, flowers, bouquet"
+        "service_tags": "wedding, flowers, bouquet",
+        "service_live": True,
+        "service_industry": "Floral & Event"
     }
 ]

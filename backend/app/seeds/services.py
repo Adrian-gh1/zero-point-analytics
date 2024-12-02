@@ -13,6 +13,8 @@ def seed_services():
             user_id=service['user_id'],
             business_id=service['business_id'],
             service_name=service['service_name'],
+            service_live=service['service_live'],
+            service_industry=service['service_industry'],
             service_description=service['service_description'],
             service_type=service['service_type'],
             service_tags=service['service_tags']

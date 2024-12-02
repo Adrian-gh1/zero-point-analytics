@@ -13,6 +13,8 @@ class Service(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey(production_prefix('users.id'), ondelete="CASCADE"), nullable=False)
     business_id = db.Column(db.Integer, db.ForeignKey(production_prefix('businesses.id'), ondelete="CASCADE"), nullable=False)
     service_name = db.Column(db.String(255), nullable=False)
+    service_live = db.Column(db.Boolean, default=False, nullable=False)
+    service_industry = db.Column(db.String(255), nullable=True)
     service_description = db.Column(db.String(500), nullable=True)
     service_type = db.Column(db.String(255), nullable=True)
     service_tags = db.Column(db.String(255), nullable=True)
@@ -23,12 +25,9 @@ class Service(db.Model):
             'user_id': self.user_id,
             'business_id': self.business_id,
             'service_name': self.service_name,
+            'service_live': self.service_live,
+            'service_industry': self.service_industry,
             'service_description': self.service_description,
             'service_type': self.service_type,
             'service_tags': self.service_tags
         }   
-    
-    # NOTE: Need to additional columns
-    # service_live (true/false) - States if service is live and made public
-    # service_industry (raw materials, supplier)
-    # 

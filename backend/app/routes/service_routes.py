@@ -87,6 +87,8 @@ def create_service():
             user_id=current_user.id,
             business_id=business.id,
             service_name=form.service_name.data,
+            service_live=form.service_live.data,
+             service_industry=form.service_industry.data,
             service_description=form.service_description.data,
             service_type=form.service_type.data,
             service_tags=form.service_tags.data
@@ -115,6 +117,10 @@ def edit_service(serviceId):
 
     if 'service_name' in data:
         service.service_name = data['service_name']
+    if 'service_live' in data:
+        service.service_live = data['service_live']
+    if 'service_industry' in data:
+        service.service_industry = data['service_industry']
     if 'service_description' in data:
         service.service_description = data['service_description']
     if 'service_type' in data:
