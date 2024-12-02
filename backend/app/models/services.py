@@ -27,3 +27,8 @@ class Service(db.Model):
             'service_type': self.service_type,
             'service_tags': self.service_tags
         }   
+    
+    # NOTE: Need to additional columns
+    # service_live (true/false) - States if service is live and made public
+    # service_industry (raw materials, supplier)
+    # 

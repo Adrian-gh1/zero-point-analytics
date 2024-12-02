@@ -5,6 +5,7 @@ import Layout from "./Layout";
 import LandingPage from "../components/LandingPage/LandingPage";
 import LoginFormPage from "../components/LoginFormPage/LoginFormPage";
 import SignupFormPage from "../components/SignupFormPage/SignupFormPage";
+import ServiceFormPage from "../components/ServiceFormPage/ServiceFormPage";
 import BusinessDetailsPage from "../components/BusinessDetailsPage";
 import BusinessPortfolioPage from "../components/BusinessPortfolioPage/BusinessPortfolioPage";
 
@@ -31,6 +32,10 @@ export const router = createBrowserRouter([
             {
                 path: '/businessPortfolio',
                 element: <BusinessPortfolioPage />
+            },
+            {
+                path: '/serviceForm',
+                element: <ServiceFormPage />
             },
             // {
             //     path: '/userProfile',

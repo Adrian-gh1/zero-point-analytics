@@ -8,10 +8,14 @@ import { combineReducers } from 'redux';
 import thunk from 'redux-thunk';
 import sessionReducer from './session';
 import businessesReducer from './businesses';
+import servicesReducer from './services';
+import connectionsReducer from './connections';
 
 const rootReducer = combineReducers({
     session: sessionReducer,
-    businesses: businessesReducer
+    businesses: businessesReducer,
+    services: servicesReducer,
+    connections: connectionsReducer
 });
 
 let enhancer;

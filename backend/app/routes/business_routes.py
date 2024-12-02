@@ -60,6 +60,7 @@ def get_business(businessId):
 @login_required
 def create_business():
     form = BusinessForm(request.form)
+    form['csrf_token'].data = request.cookies['csrf_token']
     
     if form.validate():
         existing_business = Business.query.filter_by(business_name=form.business_name.data).first()

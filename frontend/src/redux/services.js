@@ -1,6 +1,7 @@
 // frontend/src/redux/services.js
 
 const GET_ALL_SERVICES = 'services/getAllServices';
+const GET_ALL_BUSINESS_SERVICES = 'services/getAllBusinessServices';
 const GET_BUSINESS_SERVICE = 'services/getBusinessService';
 const GET_SERVICE = 'services/getService';
 const CREATE_SERVICE = 'services/createService';
@@ -9,6 +10,7 @@ const DELETE_SERVICE = 'services/deleteService';
 
 const initialState = {
     services: [],
+    allBusinessServices: [],
     selectedService: null,
     businessService: {}
 };
@@ -17,6 +19,13 @@ const initialState = {
 const actionGetAllServices = (data) => {
     return {
         type: GET_ALL_SERVICES,
+        payload: data
+    };
+};
+
+const actionGetAllBusinessServices = (data) => {
+    return {
+        type: GET_ALL_BUSINESS_SERVICES,
         payload: data
     };
 };
@@ -66,6 +75,15 @@ export const thunkGetAllServices = () => async (dispatch) => {
     return response;
 };
 
+export const thunkGetAllBusinessServices  = () => async (dispatch) => {
+    const response = await fetch('/api/services/allBusinessServices', {
+        method: 'GET'
+    });
+    const data = await response.json();
+    dispatch(actionGetAllBusinessServices(data));
+    return response;
+};
+
 export const thunkGetBusinessService = () => async (dispatch) => {    
     const response = await fetch(`/api/services/businessService`, {
         method: 'GET'
@@ -95,8 +113,8 @@ export const thunkCreateService = (serviceData) => async (dispatch) => {
     return response;
 };
 
-export const thunkEditService = (serviceData) => async (dispatch) => {    
-    const response = await fetch(`/api/services/edit`, {
+export const thunkEditService = (serviceId, serviceData) => async (dispatch) => {    
+    const response = await fetch(`/api/services/edit/${serviceId}`, {
         method: 'PATCH',
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(serviceData)
@@ -120,6 +138,8 @@ function servicesReducer(state = initialState, action) {
     switch (action.type) {
         case GET_ALL_SERVICES:
             return { ...state, services: action.payload };
+        case GET_ALL_BUSINESS_SERVICES:
+            return {...state, allBusinessServices: action.payload}
         case GET_BUSINESS_SERVICE:
             return { ...state, businessService: action.payload };
         case GET_SERVICE:
@@ -130,6 +150,7 @@ function servicesReducer(state = initialState, action) {
             return { ...state, businessService: action.payload };
         case DELETE_SERVICE:
             return { ...state, businessService: null };
+            // return { ...state, allBusinessServices: state.allBusinessServices.filter(service => service.id !== action.payload)};
         default:
             return state;
     }
