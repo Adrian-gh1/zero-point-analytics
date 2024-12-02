@@ -127,8 +127,8 @@ function BusinessPortfolioPage() {
 
                 <div className="portfolio-background">
                 {/* <div> */}
-                    {/* {allBusinessServices && allBusinessServices.length > 0 ? ( */}
-                        {allBusinessServices.map((service) => (
+                    {allBusinessServices && allBusinessServices.length > 0 ? (
+                        allBusinessServices.map((service) => (
                             <div key={service.id}>
                                 <div className='top'>
                                     
@@ -258,7 +258,11 @@ function BusinessPortfolioPage() {
                                 </div>
 
                             </div>                                
-                        ))}
+                        ))
+                    ) : (
+                        // <p>No Services Available.</p>
+                        null
+                    )}
                 </div>
 
                 <div>
