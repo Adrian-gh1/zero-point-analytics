@@ -6,7 +6,7 @@ import LandingPage from "../components/LandingPage/LandingPage";
 import LoginFormPage from "../components/LoginFormPage/LoginFormPage";
 import SignupFormPage from "../components/SignupFormPage/SignupFormPage";
 import ServiceFormPage from "../components/ServiceFormPage/ServiceFormPage";
-import BusinessDetailsPage from "../components/BusinessDetailsPage";
+import ServiceDetailsPage from "../components/ServiceDetailsPage";
 import BusinessPortfolioPage from "../components/BusinessPortfolioPage/BusinessPortfolioPage";
 
 export const router = createBrowserRouter([
@@ -26,8 +26,15 @@ export const router = createBrowserRouter([
                 element: <SignupFormPage />
             },
             {
-                path: '/business/:businessId',
-                element: <BusinessDetailsPage />
+                // path: '/business/:businessId',
+                // element: <BusinessDetailsPage />
+
+                path: '/service/:serviceId',
+                element: <ServiceDetailsPage />
+
+                // Possibly Change to:
+                // path: '/connection/:connectionId',
+                // element: <ConnectionDetailsPage />
             },
             {
                 path: '/businessPortfolio',

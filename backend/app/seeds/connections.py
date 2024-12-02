@@ -11,6 +11,7 @@ def seed_connections():
     for connection in data_connections:
         connection_class = Connection(
             user_id=connection['user_id'],
+            service_id=connection['service_id'],
             business_id_1=connection['business_id_1'],
             business_id_2=connection['business_id_2'],
             connection_type=connection['connection_type'],

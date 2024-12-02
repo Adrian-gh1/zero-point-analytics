@@ -11,6 +11,8 @@ function ServiceFormPage() {
     const navigate = useNavigate()
     const [newService, setNewService] = useState({
         service_name: '',
+        service_live: false,
+        service_industry: '',
         service_description: '',
         service_type: '',
         service_tags: ''
@@ -24,7 +26,14 @@ function ServiceFormPage() {
     const handleSubmit = async (e) => {
         e.preventDefault();
         await dispatch(thunkCreateService(newService))
-        setNewService({ service_name: '', service_description: '', service_type: '', service_tags: '' });
+        setNewService({
+            service_name: '',
+            service_live: false,
+            service_industry: '',
+            service_description: '',
+            service_type: '',
+            service_tags: '' 
+        });
         navigate('/businessPortfolio')
     };
 
@@ -42,6 +51,15 @@ function ServiceFormPage() {
                     />
                 </div>
                 <div>
+                    <label>Service Industry:</label>
+                    <input
+                        type="text"
+                        name="service_industry"
+                        value={newService.service_industry}
+                        onChange={handleChange}
+                    />
+                </div>
+                <div>
                     <label>Service Description:</label>
                     <input
                         type="text"
@@ -52,12 +70,15 @@ function ServiceFormPage() {
                 </div>
                 <div>
                     <label>Service Type:</label>
-                    <input
-                        type="text"
+                    <select
                         name="service_type"
                         value={newService.service_type}
                         onChange={handleChange}
-                    />
+                    >
+                        <option value="">Select a service type</option>
+                        <option value="Offer">Offer</option>
+                        <option value="Request">Request</option>
+                    </select>
                 </div>
                 <div>
                     <label>Service Tags:</label>

@@ -35,7 +35,8 @@ class ServiceForm(FlaskForm):
     ])
 
     service_live = BooleanField('Service Live', default=False, validators=[
-        DataRequired(message='Service Live status is required')
+        # DataRequired(message='Service Live status is required')
+        Optional(),
     ])
     
     service_industry = StringField('Service Industry', validators=[

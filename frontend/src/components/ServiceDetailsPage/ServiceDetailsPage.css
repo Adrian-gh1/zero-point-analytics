@@ -1,4 +1,4 @@
-/* frontend/src/components/BusinessDetailsPage/BusinessDetailsPage.css */
+/* frontend/src/components/ServiceDetailsPage/ServiceDetailsPage.css */
 
 .business-comparison-container {
     display: flex;
@@ -6,7 +6,7 @@
     justify-content: flex-start;
     align-items: center;
     padding: 20px;
-    height: 100vh;
+    height: 50vh;
 }
 
 .business-comparison {
@@ -50,10 +50,10 @@
 .button-container {
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 30px;
     align-self: center;  /* Align buttons in the center between the columns */
     justify-content: center;
-    margin-top: 50px;
+    margin-top: 20px;
 }
 
 .action-button {
@@ -76,4 +76,31 @@
         flex-direction: column;
         gap: 10px;
     }
+}
+
+/* Styling for the new service section */
+.service-section {
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: #e9f5fc; /* Visual distinction */
+    width: 100%;
+    max-width: 1200px;
+    margin: 10px auto; /* Center the section and add spacing */
+}
+
+.service-section h3 {
+    text-align: center;
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+}
+
+.service-detail {
+    margin-bottom: 15px;
+    font-size: 1.1rem;
+}
+
+.service-detail strong {
+    font-weight: bold;
 }

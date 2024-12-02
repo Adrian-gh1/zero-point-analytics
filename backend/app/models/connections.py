@@ -11,6 +11,7 @@ class Connection(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey(production_prefix('users.id'), ondelete="CASCADE"), nullable=False)
+    service_id = db.Column(db.Integer, db.ForeignKey(production_prefix('services.id'), ondelete="CASCADE"), nullable=False)
     business_id_1 = db.Column(db.Integer, db.ForeignKey(production_prefix('businesses.id'), ondelete="CASCADE"), nullable=False)
     business_id_2 = db.Column(db.Integer, db.ForeignKey(production_prefix('businesses.id'), ondelete="CASCADE"), nullable=False)
     connection_type = db.Column(db.String(255), nullable=True)
@@ -21,6 +22,7 @@ class Connection(db.Model):
         return {
             'id': self.id,
             'user_id': self.user_id,
+            'service_id': self.service_id,
             'business_id_1': self.business_id_1,
             'business_id_2': self.business_id_2,
             'connection_type': self.connection_type,

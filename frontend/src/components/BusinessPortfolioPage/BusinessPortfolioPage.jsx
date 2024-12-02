@@ -88,9 +88,20 @@ function BusinessPortfolioPage() {
         setEditMode(false);
     };
 
-    const publishButtonHandler = async (e) => {
+    const publishButtonHandler = async (e, serviceId) => {
         e.preventDefault();
-        // Call Thunk Here
+
+        // Step 1: Update the local state to reflect that the service is live.
+        const updatedService = { ...updateService[serviceId], service_live: true };
+        setUpdateService({
+            ...updateService,
+            [serviceId]: updatedService,
+        });
+
+        // Step 2: Dispatch an action to update the service on the backend.
+        await dispatch(thunkEditService(serviceId, updatedService));
+
+
         navigate('/')
         // Maybe navigate to the BusinessDetailsPage: navigate('/business/:businessId')
     };
@@ -240,7 +251,7 @@ function BusinessPortfolioPage() {
                                         <div className='bottom-right'>
                                                 <button onClick={(e) => deleteButtonHandler(e, service.id)}>Delete Service</button>
                                                 <button onClick={editButtonHandler}>Edit Details</button>
-                                                <button onClick={publishButtonHandler}>Advertise</button>
+                                                <button onClick={(e) => publishButtonHandler(e, service.id)} disabled={service.service_live}>Advertise</button>
                                         </div>
                                     )}              
                             </div>

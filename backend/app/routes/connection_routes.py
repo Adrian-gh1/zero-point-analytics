@@ -42,6 +42,8 @@ def get_connection(connectionId):
 def create_connection():
     data = request.get_json()
 
+    if not data.get('service_id'):
+        return jsonify({'error': 'service_id is required'}), 400
     if not data.get('business_id_1'):
         return jsonify({'error': 'business_id_1 is required'}), 400
     if not data.get('business_id_2'):
@@ -58,6 +60,7 @@ def create_connection():
 
     new_connection = Connection(
         user_id=current_user.id,
+        service_id=data['service_id'],
         business_id_1=data['business_id_1'],
         business_id_2=data['business_id_2'],
         connection_type=data['connection_type'],
