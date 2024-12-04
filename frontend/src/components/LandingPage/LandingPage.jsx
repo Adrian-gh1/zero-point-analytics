@@ -24,8 +24,8 @@ function LandingPage() {
     }, [dispatch, sessionUser]);
 
     const serviceHandler = (serviceId) => {
-        console.log('Tracer 3.1:', !!sessionUser, !!sessionUser?.id, !!userBusiness?.id);
-        console.log('Tracer 3.2:', sessionUser, sessionUser?.id, userBusiness?.id);
+        // console.log('Tracer 3.1:', !!sessionUser, !!sessionUser?.id, !!userBusiness?.id);
+        // console.log('Tracer 3.2:', sessionUser, sessionUser?.id, userBusiness?.id);
         
         if (sessionUser && sessionUser?.id && userBusiness?.id) {
             navigate(`service/${serviceId}`);
@@ -38,13 +38,20 @@ function LandingPage() {
         }
     };
 
+    // NOTE: Removes any services from view that belong to the user.
+    // NOTE: Removes any services that aren't made public/published
+    // NOTE: The user can view their services on the Business Portfolio.
+    const filteredServices = services.filter(service => 
+        service.user_id !== sessionUser?.id && service.service_live === true
+    );
+
     return (
         <div className="landing-page-container">
             {/* <div className="landing-page-header"><h2>Landing Page</h2></div> */}
             {/* <div className="filter-bar">Filter Bar</div> */}
             {/* <h2>Company List</h2> */}
             <div className="business-list">
-                {services.map((service) => (
+                {filteredServices.map((service) => (
                     <div
                         key={service.id}
                         className="business-item"
