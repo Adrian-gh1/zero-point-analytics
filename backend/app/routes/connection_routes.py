@@ -33,7 +33,7 @@ def get_business_connection():
     connection = Connection.query.filter_by(user_id=current_user.id).first()
 
     if not connection:
-        return jsonify({'error': 'No connections found for this user'}), 404
+        return jsonify({'error': 'Business does not have a connection'}), 404
     
     return jsonify(connection.to_dict()), 200
 

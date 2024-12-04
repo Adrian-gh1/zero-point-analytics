@@ -34,7 +34,8 @@ function ServiceDetailsPage() {
     }, [dispatch, userBusiness]);
 
     useEffect(() => {
-        if (allBusinessConnections && serviceId) {
+        if (Array.isArray(allBusinessConnections) && serviceId) {
+        // if (allBusinessConnections && serviceId) {
             const connectionExists = allBusinessConnections.some(connection => connection.service_id === parseInt(serviceId));
             setIsButtonDisabled(connectionExists);
         }
@@ -58,10 +59,10 @@ function ServiceDetailsPage() {
     const sendConnectionHandler = async () => {
         const connectionData = {
             service_id: serviceId,
-            business_id_1: userBusiness.id, // Your business ID
-            business_id_2: selectedBusiness.id, // Selected business ID
-            connection_type: 'Partnership', // Modify as needed
-            connection_status: 'Pending', // Example status
+            business_id_1: userBusiness.id, // Your business ID (It should be the ID of the Connection Creater)
+            business_id_2: selectedBusiness.id, // Selected business ID (It should be the ID of the Service Creator)
+            connection_type: 'Partnership',
+            connection_status: 'Pending',
             connection_description: `Request for partnership regarding ${selectedService.service_name}`,
         };
 
@@ -108,13 +109,27 @@ function ServiceDetailsPage() {
                         <button className="action-button" onClick={sendConnectionHandler} disabled={isButtonDisabled}>Send Connection</button>
                         {/* <button className="action-button">Edit Details</button> */}
 
-                        {allBusinessConnections.map((connection) => (
-                            connection.service_id === parseInt(serviceId) && (
-                                <button key={connection.id} className="action-button" onClick={() => deleteButtonHandler(connection.id)}>
-                                    Cancellation Request
-                                </button>
-                            )
-                        ))}
+                        {allBusinessConnections?.length ? (
+                            allBusinessConnections?.map((connection) => (
+                                connection.service_id === parseInt(serviceId) && (
+                                    <button
+                                        key={connection.id}
+                                        className="action-button"
+                                        onClick={() => deleteButtonHandler(connection.id)}
+                                        disabled={false}
+                                    >
+                                        Cancellation Request
+                                    </button>
+                                )
+                            ))
+
+                        ) : (
+                            // <p>No connections available</p>
+                            <button className="action-button" disabled>
+                                Cancellation Request
+                            </button>
+                        )}
+
 
                     </div>
 

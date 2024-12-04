@@ -15,10 +15,12 @@ auth_routes = Blueprint('auth_routes', __name__)
 def login():
     form = LoginForm()
     form['csrf_token'].data = request.cookies['csrf_token']
+
     if form.validate_on_submit():
         user = User.query.filter(User.email == form.email.data).first()
         login_user(user)
         return user.to_dict()
+    
     return form.errors, 401
 
 # Signup Route
@@ -26,6 +28,7 @@ def login():
 def sign_up():
     form = SignupForm()
     form['csrf_token'].data = request.cookies['csrf_token']
+
     if form.validate_on_submit():
         hashed_password = generate_password_hash(form.password.data)
         user = User(
@@ -36,11 +39,15 @@ def sign_up():
             role = form.role.data,
             hashedPassword = hashed_password
         )
+
         db.session.add(user)
         db.session.commit()
         login_user(user)
+
         return user.to_dict()
-    return form.errors, 400
+    
+    return jsonify({'error': form.errors}), 400
+    # return form.errors, 400
 
 # Authenticate Route
 @auth_routes.route('/')

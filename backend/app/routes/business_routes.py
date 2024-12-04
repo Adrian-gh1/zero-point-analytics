@@ -41,6 +41,7 @@ def get_user_business():
    
     if not business:
         return jsonify({'error': 'User does not have a business'}), 404
+        # return {'error': 'User does not have a business'}, 404
 
     return jsonify(business.to_dict()), 200
 
@@ -59,15 +60,16 @@ def get_business(businessId):
 @business_routes.route('/create', methods=['POST'])
 @login_required
 def create_business():
-    form = BusinessForm(request.form)
+    form = BusinessForm(data=request.json)
     form['csrf_token'].data = request.cookies['csrf_token']
     
     if form.validate():
         existing_business = Business.query.filter_by(business_name=form.business_name.data).first()
         if existing_business:
-            return jsonify({'errors': {'message': 'Business with this name already exists.'}}), 400
+            return jsonify({'error': {'message': 'Business with this name already exists.'}}), 400
         
         new_business = Business(
+            user_id=current_user.id,
             business_name=form.business_name.data,
             business_address=form.business_address.data,
             business_email=form.business_email.data,
@@ -80,12 +82,15 @@ def create_business():
         db.session.add(new_business)
         db.session.commit()
 
-        return jsonify({
-            'message': 'Business created successfully',
-            'business': new_business.to_dict()
-        }), 201
+        # return jsonify({
+        #     'message': 'Business created successfully',
+        #     'business': new_business.to_dict()
+        # }), 201
+    
+        return new_business.to_dict()
 
-    return jsonify({'errors': form.errors}), 400
+    return jsonify({'error': form.errors}), 400
+    # return form.error, 400
 
 # Edit Business Details
 @business_routes.route('/edit', methods=['PATCH'])

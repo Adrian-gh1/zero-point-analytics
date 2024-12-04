@@ -1,7 +1,7 @@
 // frontend/src/redux/connections.js
 
 const GET_ALL_CONNECTIONS = 'connections/getAllConnections';
-const GET_ALL_BUSINESS_CONNECTIONS = 'services/getAllBusinessConnections';
+const GET_ALL_BUSINESS_CONNECTIONS = 'connections/getAllBusinessConnections';
 const GET_BUSINESS_CONNECTION = 'connections/getBusinessConnection';
 const GET_CONNECTION = 'connections/getConnection';
 const CREATE_CONNECTION = 'connections/createConnection';

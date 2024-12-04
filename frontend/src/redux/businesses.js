@@ -5,7 +5,7 @@ const GET_USER_BUSINESS = 'businesses/getUserBusiness';
 const GET_BUSINESS = 'businesses/getBusiness';
 const CREATE_BUSINESS = 'businesses/createBusiness';
 const EDIT_BUSINESS = 'businesses/editBusiness'; 
-const DELETE_BUSINESS = 'connections/deleteBusiness';
+const DELETE_BUSINESS = 'businesses/deleteBusiness';
 
 const initialState = {
     businesses: [],
@@ -49,10 +49,10 @@ const actionEditBusiness = (data) => {
     };
 };
 
-const actionDeleteBusiness = (connectionId) => {
+const actionDeleteBusiness = (businessId) => {
     return {
         type: DELETE_BUSINESS,
-        payload: connectionId
+        payload: businessId
     };
 };
 
@@ -70,9 +70,21 @@ export const thunkGetUserBusiness = () => async (dispatch) => {
     const response = await fetch(`/api/businesses/userBusiness`, {
         method: 'GET'
     });
+
+    // console.log('Tracer 1.1', response);    
     const data = await response.json();
-    dispatch(actionGetUserBusiness(data));
-    return response;
+    // console.log('Tracer 1.2', data);
+
+    if (response.ok) {
+
+        if (data.error) {
+            return;
+        }
+
+        dispatch(actionGetUserBusiness(data));
+        return data;
+
+    }
 };
 
 export const thunkGetBusiness = (businessId) => async (dispatch) => {    
@@ -92,7 +104,7 @@ export const thunkCreateBusiness = (businessData) => async (dispatch) => {
     });
     const data = await response.json();
     dispatch(actionCreateBusiness(data));
-    return response;
+    return data;
 };
 
 export const thunkEditBusiness = (businessData) => async (dispatch) => {    

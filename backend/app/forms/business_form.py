@@ -7,7 +7,7 @@ from app.models import Business
 
 # Custom validation function to check if business name already exists
 def business_exists(form, field):
-    business = Business.query.filter(Business.businessName == field.data).first()
+    business = Business.query.filter(Business.business_name == field.data).first()
     if business:
         raise ValidationError("A business with this name already exists.")
 

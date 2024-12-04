@@ -31,11 +31,11 @@ export const thunkLogin = (credentials) => async dispatch => {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(credentials)
-  });
+  });            
 
   const data = await response.json();
   dispatch(setUser(data));
-  return response;
+  return data;
 };
 
 export const thunkSignup = (user) => async (dispatch) => {
@@ -47,7 +47,7 @@ export const thunkSignup = (user) => async (dispatch) => {
 
   const data = await response.json();
   dispatch(setUser(data));
-  return response;
+  return data;
 };
 
 export const thunkLogout = () => async (dispatch) => {

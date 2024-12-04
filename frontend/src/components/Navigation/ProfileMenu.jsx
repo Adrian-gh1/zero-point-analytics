@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { FaUser } from 'react-icons/fa';
+import { thunkGetUserBusiness } from '../../redux/businesses';
 import { thunkLogout } from '../../redux/session';
 import './ProfileMenu.css';
 
@@ -12,14 +13,27 @@ function ProfileMenu() {
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const sessionUser = useSelector(state => state.session.user);
-    // const userBusiness = useSelector(state => state.businesses.userBusiness)        
+    const userBusiness = useSelector(state => state.businesses.userBusiness)        
 
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const profileRef = useRef(null);
 
+    useEffect(() => {
+        if (!sessionUser && sessionUser?.id) {
+            dispatch(thunkGetUserBusiness());
+        }
+    }, [dispatch, sessionUser]);
+
     const handleNavigate = (path) => {
-        navigate(path);
-        toggleMenu(false);
+        if (userBusiness.error) {
+            navigate('/businessForm');
+        }
+
+        if (!userBusiness.error) {
+            navigate(path);
+            toggleMenu(false);
+        }
+
     };
 
     const handleLogout = () => {
