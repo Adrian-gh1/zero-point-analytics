@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { thunkLogin } from "../../redux/session";
 import './LoginFormPage.css';
 
@@ -95,9 +95,10 @@ function LoginFormPage() {
                 <button onClick={demoLoginHandler} className="demo-login-button">Demo Login</button>
             </div>
 
-            {/* <div className="login-footer">
-                Have an Account? Login
-            </div> */}
+            <div className="login-footer">
+                Don't have an Account? 
+                <Link to="/signup" className="signup-link">Signup</Link>
+            </div>
         </div>
     )
 }

@@ -77,3 +77,20 @@
 .signup-submit-button:hover {
     background-color: #0056b3;
 }
+
+
+.signup-footer {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.login-link {
+    /* color: blue; */
+    text-decoration: none; /* Remove underline */
+    /* font-weight: bold; */
+    margin-left: 5px;
+}
+
+.login-link:hover {
+    text-decoration: underline;
+}

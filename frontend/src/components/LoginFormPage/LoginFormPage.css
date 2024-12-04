@@ -94,9 +94,19 @@
     background-color: #218838;
 }
 
-/* Optional: Style for "Have an Account" link */
+/* Style for "Have an Account" link */
 .login-footer {
     text-align: center;
     margin-top: 20px;
-    font-size: 0.9rem;
+}
+
+.signup-link {
+    /* color: blue; */
+    text-decoration: none; /* Remove underline */
+    margin-left: 5px;
+    /* font-weight: bold; */
+}
+
+.signup-link:hover {
+    text-decoration: underline; /* Underline on hover for better user interaction */
 }

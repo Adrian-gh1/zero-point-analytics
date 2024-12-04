@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import { thunkSignup } from '../../redux/session';
 import './SignupFormPage.css';
 
@@ -99,6 +99,12 @@ function SignupFormPage() {
                 {/* <button type="submit" className="signup-submit-button">Continue</button> */}
                 <button type="submit" className="signup-submit-button">Submit</button>
             </form>
+
+            <div className="signup-footer">
+                Have an account? 
+                <Link to="/login" className="login-link">Login</Link>
+            </div>
+
         </div>
         
     );
