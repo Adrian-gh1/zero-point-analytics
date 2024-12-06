@@ -6,6 +6,7 @@ import { useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { FaUser } from 'react-icons/fa';
 import { thunkGetUserBusiness } from '../../redux/businesses';
+import LoadingModal from '../LoadingModal';
 import { thunkLogout } from '../../redux/session';
 import './ProfileMenu.css';
 
@@ -15,12 +16,16 @@ function ProfileMenu() {
     const sessionUser = useSelector(state => state.session.user);
     const userBusiness = useSelector(state => state.businesses.userBusiness)        
 
+
     const [isMenuOpen, setIsMenuOpen] = useState(false);
+    const [loading, setLoading] = useState(false);
     const profileRef = useRef(null);
 
     useEffect(() => {
         if (!sessionUser && sessionUser?.id) {
-            dispatch(thunkGetUserBusiness());
+            setLoading(true);
+            dispatch(thunkGetUserBusiness())
+                .finally(() => setLoading(false));
         }
     }, [dispatch, sessionUser]);
 
@@ -37,9 +42,16 @@ function ProfileMenu() {
     };
 
     const handleLogout = () => {
-        dispatch(thunkLogout());
-        navigate('/');
-        setIsMenuOpen(false);
+        setLoading(true);
+        dispatch(thunkLogout())
+            .then(() => {
+                navigate('/');
+            })
+            .finally(() => {
+                setLoading(false);
+                setIsMenuOpen(false);
+            });
+        // setIsMenuOpen(false);
     };
 
     const toggleMenu = () => {
@@ -59,6 +71,10 @@ function ProfileMenu() {
         };
 
     }, []);
+
+    if (loading) {
+        return <LoadingModal />;
+    }
 
     return (
         <div>

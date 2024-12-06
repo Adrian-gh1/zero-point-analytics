@@ -7,6 +7,7 @@ import { useParams } from 'react-router-dom';
 import { thunkGetBusiness, thunkGetUserBusiness } from '../../redux/businesses';
 import { thunkGetService, thunkGetBusinessService } from '../../redux/services';
 import { thunkCreateConnection, thunkGetAllBusinessConnections, thunkDeleteConnection } from '../../redux/connections';
+import LoadingModal from '../LoadingModal';
 import './ServiceDetailsPage.css';
 
 function ServiceDetailsPage() {
@@ -19,13 +20,25 @@ function ServiceDetailsPage() {
     const businessService = useSelector(state => state.services.businessService);
     const allBusinessConnections = useSelector(state => state.connections.allBusinessConnections);
 
+    const [loadingState, setLoadingState] = useState(true);
     const [isButtonDisabled, setIsButtonDisabled] = useState(false);
 
+    // useEffect(() => {
+    //     if (serviceId) {
+    //         dispatch(thunkGetService(serviceId));
+    //     }
+    // }, [dispatch, serviceId]);
+
+    // NOTE: Loading State Logic
     useEffect(() => {
         if (serviceId) {
-            dispatch(thunkGetService(serviceId));
+            setLoadingState(true);
+            dispatch(thunkGetService(serviceId))
+                .then(() => setLoadingState(false))
+                .catch(() => setLoadingState(false));
         }
     }, [dispatch, serviceId]);
+    
 
     useEffect(() => {
         if (userBusiness) {
@@ -41,30 +54,41 @@ function ServiceDetailsPage() {
         }
     }, [allBusinessConnections, serviceId]);
 
-     useEffect(() => {
+    // NOTE: Loading State Logic
+    useEffect(() => {
         if (selectedService) {
             const businessId = selectedService.business_id;
             if (businessId) {
-                dispatch(thunkGetBusiness(businessId));
-                dispatch(thunkGetBusinessService());
+                setLoadingState(true);
+                dispatch(thunkGetBusiness(businessId))
+                    .then(() => {
+                        dispatch(thunkGetBusinessService());
+                        setLoadingState(false);
+                    })
+                    .catch(() => setLoadingState(false));
             }
-            dispatch(thunkGetUserBusiness());
         }
     }, [dispatch, selectedService]);
 
-    if (!selectedBusiness || !userBusiness || !selectedService || !businessService) {
-        return <div>Loading data...</div>;
+    // if (!selectedBusiness || !userBusiness || !selectedService || !businessService) {
+    //     return <div>Loading data...</div>;
+    // }
+
+    // NOTE: Loading State Logic
+    if (loadingState || !selectedBusiness || !userBusiness || !selectedService || !businessService) {
+        return <LoadingModal />;
     }
+    
 
     const sendConnectionHandler = async () => {
         const connectionData = {
             service_id: serviceId,
-            business_id_1: userBusiness.id, // Your business ID (It should be the ID of the Connection Creater)
-            business_id_2: selectedBusiness.id, // Selected business ID (It should be the ID of the Service Creator)
+            business_id_1: selectedBusiness.id, // Your business ID (It should be the ID of the Connection Creater)
+            business_id_2: userBusiness.id, // Selected business ID (It should be the ID of the Service Creator)
             connection_type: 'Partnership',
             connection_status: 'Pending',
             connection_description: `Request for partnership regarding ${selectedService.service_name}`,
-        };
+        }; // NOTE: Flip business_id_1 and business_id_2 to match seed data
 
         await dispatch(thunkCreateConnection(connectionData));
         await dispatch(thunkGetAllBusinessConnections());

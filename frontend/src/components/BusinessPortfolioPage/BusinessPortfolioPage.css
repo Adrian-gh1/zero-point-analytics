@@ -1,16 +1,35 @@
+/* frontend/src/components/BusinessPortfolioPage/BusinessPortfolioPage.css */
+
 /* Container wrapper for scoped styles */
 .business-portfolio-page {
-    background-color: #2e2e2e; /* Slightly lighter dark gray */
-    color: #f5f5f5; /* Light text color for readability */
+    /* background-color: #2e2e2e; */
+    /* color: #f5f5f5; */
     font-family: 'Arial', sans-serif;
 }
 
 .business-portfolio-page .portfolio-background {
-    background-color: #3e3e3e; /* Medium-dark gray for contrast */
+    /* background-color: #3e3e3e; */
     padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    /* border-radius: 10px; */
+    /* box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2); */
     margin: 20px 0; /* Adds space above and below */
+    /* margin-bottom: 200px; */
+    /* background-color: #b35151; */
+}
+
+.business-portfolio-service {
+    /* background-color: #b35151; */
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    padding: 20px;
+    border-radius: 8px;
+    text-align: left;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    /* transition: transform 0.3s ease; */
+    /* cursor: pointer; */
+
+
+    margin-bottom: 30px;
 }
 
 .business-portfolio-page .top {
@@ -22,52 +41,61 @@
 .business-portfolio-page .top-left {
     width: 30%;
     background-color: #4a4a4a; /* Dark gray */
+    background-color: #f9f9f9;
     padding: 15px;
     text-align: center;
     border-radius: 8px;
     box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+    border: 1px solid #ddd;
 }
 
 .business-portfolio-page .top-center {
     width: 35%;
     padding: 15px;
     background-color: #3e3e3e; /* Medium-dark gray */
+    background-color: #f9f9f9;
     border-radius: 8px;
     box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+    border: 1px solid #ddd;
 }
 
 .business-portfolio-page .top-center div {
     margin-bottom: 12px;
     font-size: 1.0em;
-    color: #f5f5f5; /* Light color for text */
+    /* color: #f5f5f5; */
 }
 
 .business-portfolio-page .top-right {
     width: 30%;
     background-color: #4a4a4a; /* Dark gray */
+    background-color: #f9f9f9;
     padding: 15px;
     border-radius: 8px;
     box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+    border: 1px solid #ddd;
 }
 
 .business-portfolio-page .top-right div {
     margin-bottom: 12px;
     font-size: 1.0em;
-    color: #f5f5f5; /* Light color for text */
+    /* color: #f5f5f5; */
 }
 
 .business-portfolio-page .middle {
     padding: 20px;
     margin-top: 20px;
     background-color: #5a5a5a; /* Soft gray */
+    background-color: #f9f9f9;
     border-radius: 8px;
     box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
     font-size: 1.0em;
-    color: #f5f5f5; /* Light color for text */
+    /* color: #f5f5f5; */
+    border: 1px solid #ddd;
 }
 
 .business-portfolio-page .bottom {
     margin-top: 30px;
+    /* margin-bottom: 50px; */
 }
 
 .business-portfolio-page .bottom-right {

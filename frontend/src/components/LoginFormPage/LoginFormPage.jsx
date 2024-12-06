@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, Link } from "react-router-dom";
 import { thunkLogin } from "../../redux/session";
+import LoadingModal from "../LoadingModal";
 import './LoginFormPage.css';
 
 function LoginFormPage() {
@@ -14,6 +15,7 @@ function LoginFormPage() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [errors, setErrors] = useState({email: '', password: ''});
+    const [loadingState, setLoadingState] = useState(false);
     
     // Dynamic States
     useEffect(() => {
@@ -25,10 +27,14 @@ function LoginFormPage() {
     // Static States
     const demoLoginHandler = async (e) => {
         e.preventDefault();
+        setLoadingState(true);
+
         const response = await dispatch(thunkLogin({
             email: "demo@aa.io", 
             password: "password"
         }));
+        
+        setLoadingState(false);
 
         if (response.error) {
             setErrors("Invalid email or password. Please try again.");
@@ -37,7 +43,11 @@ function LoginFormPage() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        setLoadingState(true);
+
         const response = await dispatch(thunkLogin({email, password}));
+
+        setLoadingState(false);
 
         if (response.email || response.password) {
             setErrors({
@@ -47,17 +57,22 @@ function LoginFormPage() {
         }        
     };
 
+    if (loadingState) {
+        return <LoadingModal />;
+    }
+
     return (
         <div className="login-form-container">
             {/* NOTE: If  onSubmit fails to submit defaults to onClick*/}
+
             <form 
                 className="login-form" 
                 onSubmit={handleSubmit} 
-                onClick={(e) => {
-                    if (e.target !== e.currentTarget) {
-                        handleSubmit(e);
-                    }
-                }}
+                // onClick={(e) => {
+                //     if (e.target !== e.currentTarget) {
+                //         handleSubmit(e);
+                //     }
+                // }}
             >
                 <div className="login-input-group">
                     <label htmlFor="email">Email:</label>
@@ -96,7 +111,7 @@ function LoginFormPage() {
             </div>
 
             <div className="login-footer">
-                Don't have an Account? 
+                Don&apos;t have an account? 
                 <Link to="/signup" className="signup-link">Signup</Link>
             </div>
         </div>
