@@ -135,16 +135,20 @@ function ServiceDetailsPage() {
 
                         {allBusinessConnections?.length ? (
                             allBusinessConnections?.map((connection) => (
-                                connection.service_id === parseInt(serviceId) && (
-                                    <button
-                                        key={connection.id}
-                                        className="action-button"
-                                        onClick={() => deleteButtonHandler(connection.id)}
-                                        disabled={false}
-                                    >
-                                        Cancellation Request
-                                    </button>
-                                )
+                                // connection.service_id === parseInt(serviceId) && (
+                                connection.service_id === parseInt(serviceId) || !connection.service_id ? (
+                                    <div>
+                                        {/* {console.log('Tracer 1.1', )}                                      */}
+                                        <button
+                                            key={connection.id}
+                                            className="action-button"
+                                            onClick={() => deleteButtonHandler(connection.id)}
+                                            disabled={false}
+                                        >
+                                            Cancellation Request
+                                        </button>
+                                    </div>                    
+                                ) : null
                             ))
 
                         ) : (

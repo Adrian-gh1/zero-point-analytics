@@ -99,6 +99,7 @@ function BusinessPortfolioPage() {
     const publishButtonHandler = async (e, serviceId) => {
         e.preventDefault();
 
+        // Toggle from true to false on click
         const updatedService = { ...updateService[serviceId], service_live: true };
         setUpdateService({
             ...updateService,
@@ -240,6 +241,8 @@ function BusinessPortfolioPage() {
                                                 <div>
                                                     <div>Business Name: N/A</div>
                                                     <div>Business Email: N/A</div>
+                                                    <div>Business Industry: N/A</div>
+                                                    <div>Business Address: N/A</div>
                                                     {/* <div>Connection Status: N/A</div> */}
                                                     <div>Connection Type: N/A</div>
                                                     <div>Connection Status: Inactive</div>
@@ -281,6 +284,7 @@ function BusinessPortfolioPage() {
                                         <div className='bottom-right'>
                                                 <button onClick={(e) => deleteButtonHandler(e, service.id)}>Delete Service</button>
                                                 <button onClick={editButtonHandler}>Edit Details</button>
+                                                {/* NOTE: Change Advertise to Delist/Unpublish/withdraw */}
                                                 <button onClick={(e) => publishButtonHandler(e, service.id)} disabled={service.service_live}>Advertise</button>
                                         </div>
                                     )}              
