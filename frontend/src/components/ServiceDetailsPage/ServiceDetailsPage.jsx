@@ -137,8 +137,8 @@ function ServiceDetailsPage() {
                             allBusinessConnections?.map((connection) => (
                                 // connection.service_id === parseInt(serviceId) && (
                                 connection.service_id === parseInt(serviceId) || !connection.service_id ? (
-                                    <div>
-                                        {/* {console.log('Tracer 1.1', )}                                      */}
+                                    // <div>
+                                        // {/* {console.log('Tracer 1.1', )} */}
                                         <button
                                             key={connection.id}
                                             className="action-button"
@@ -147,7 +147,7 @@ function ServiceDetailsPage() {
                                         >
                                             Cancellation Request
                                         </button>
-                                    </div>                    
+                                    // </div>                
                                 ) : null
                             ))
 
