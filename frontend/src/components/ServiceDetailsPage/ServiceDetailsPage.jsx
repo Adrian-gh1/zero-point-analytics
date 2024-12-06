@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
-import { thunkGetBusiness, thunkGetUserBusiness } from '../../redux/businesses';
+import { thunkGetBusiness } from '../../redux/businesses';
 import { thunkGetService, thunkGetBusinessService } from '../../redux/services';
 import { thunkCreateConnection, thunkGetAllBusinessConnections, thunkDeleteConnection } from '../../redux/connections';
 import LoadingModal from '../LoadingModal';
