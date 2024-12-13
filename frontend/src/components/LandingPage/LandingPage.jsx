@@ -1,6 +1,6 @@
 // frontend/src/components/LandingPage/LandingPage.jsx
 
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { thunkGetUserBusiness } from '../../redux/businesses';
@@ -23,6 +23,28 @@ function LandingPage() {
         dispatch(thunkGetAllServices());
     }, [dispatch, sessionUser]);
 
+
+    // Image slideshow state
+    const [currentImageIndex, setCurrentImageIndex] = useState(0);
+
+    // Array of image paths for the slideshow
+    const imagePaths = [
+        '/images/LandingPageImages/image1.png',
+        '/images/LandingPageImages/image2.png',
+        '/images/LandingPageImages/image3.png',
+        '/images/LandingPageImages/image4.png',
+    ];
+
+    // Update background image at intervals
+    useEffect(() => {
+        const interval = setInterval(() => {
+            setCurrentImageIndex(prevIndex => (prevIndex + 1) % imagePaths.length);
+        }, 5000); // Change image every 3 seconds
+
+        return () => clearInterval(interval); // Clean up on component unmount
+    }, [imagePaths.length]);
+
+
     const serviceHandler = (serviceId) => {
         // console.log('Tracer 3.1:', !!sessionUser, !!sessionUser?.id, !!userBusiness?.id);
         // console.log('Tracer 3.2:', sessionUser, sessionUser?.id, userBusiness?.id);
@@ -38,6 +60,17 @@ function LandingPage() {
         }
     };
 
+    const getStartedButtonHandler = () => {
+        if (!sessionUser?.id) {
+            // If user is not logged in, navigate to login page
+            navigate('/signup');
+        } else {
+            // If user is logged in, you can handle further navigation or logic here
+            // For example, navigate to a dashboard or another page:
+            navigate('/businessPortfolio');
+        }
+    };
+
     // NOTE: Removes any services from view that belong to the user.
     // NOTE: Removes any services that aren't made public/published
     // NOTE: The user can view their services on the Business Portfolio.
@@ -46,25 +79,26 @@ function LandingPage() {
     );
 
     return (
-        <div className="landing-page-container">
-            {/* <div className="landing-page-header"><h2>Landing Page</h2></div> */}
+        <div
+            className="landing-page-container"
+            style={{
+                backgroundImage: `url(${imagePaths[currentImageIndex]})`,
+                backgroundSize: 'cover',
+                backgroundPosition: 'center',
+                height: 'calc(100vh - 70px)',
+            }}
+        >
             {/* <div className="filter-bar">Filter Bar</div> */}
-            {/* <h2>Company List</h2> */}
-            <div className="business-list">
-                {filteredServices.map((service) => (
-                    <div
-                        key={service.id}
-                        className="business-item"
-                        onClick={() => serviceHandler(service.id)}
-                    >
-                        <div className="business-info">
-                            <h3>{service.service_name}</h3>
-                            <div>{service.service_industry}</div>
-                            <p>{service.service_description}</p>
-                        </div>
-                    </div>
-                ))}
-            </div>
+            <h1>Welcome to Zero Point</h1>
+            <h2>Business to Business Connections</h2>
+            <h3>Grow your Business with us</h3>
+
+            <button
+                className="get-started-button"
+                onClick={getStartedButtonHandler}
+            >
+                GET STARTED
+            </button>
         </div>
     );
 }

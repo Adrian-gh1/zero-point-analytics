@@ -27,6 +27,7 @@
 
 .dropdown-menu li:hover {
     background-color: #555;
+    /* cursor: pointer; */
 }
 
 .dropdown-menu li:active {

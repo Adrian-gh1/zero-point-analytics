@@ -26,9 +26,10 @@ function BusinessPortfolioPage() {
     const [updatedBusiness, setUpdatedBusiness] = useState({});
     const [updateService, setUpdateService] = useState({});
 
+    const [isLoading, setIsLoading] = useState(false);
     // const [loadingState, setLoadingState] = useState(true);
     // const isLoading =  !loadingState || !selectedBusiness || !allBusinessServices || !allBusinessConnections;
-    const loadingState =  !selectedBusiness || !allBusinessServices || !allBusinessConnections;
+    // const loadingState =  !selectedBusiness || !allBusinessServices || !allBusinessConnections;
 
 
     useEffect(() => {
@@ -98,18 +99,23 @@ function BusinessPortfolioPage() {
 
     const publishButtonHandler = async (e, serviceId) => {
         e.preventDefault();
+        setIsLoading(true);
 
-        // Toggle from true to false on click
-        const updatedService = { ...updateService[serviceId], service_live: true };
+        const updatedService = {
+            ...updateService[serviceId],
+            service_live: !updateService[serviceId].service_live
+        };
         setUpdateService({
             ...updateService,
             [serviceId]: updatedService,
         });
 
         await dispatch(thunkEditService(serviceId, updatedService));
+        await dispatch(thunkGetAllBusinessServices());
 
+        setIsLoading(false);
 
-        navigate('/')
+        // navigate('/');
         // Maybe navigate to the BusinessDetailsPage: navigate('/business/:businessId')
     };
 
@@ -118,7 +124,7 @@ function BusinessPortfolioPage() {
         navigate('/serviceForm');
     };
 
-    if (loadingState) {
+    if (isLoading) {
         return <LoadingModal />;
     }
 
@@ -285,7 +291,13 @@ function BusinessPortfolioPage() {
                                                 <button onClick={(e) => deleteButtonHandler(e, service.id)}>Delete Service</button>
                                                 <button onClick={editButtonHandler}>Edit Details</button>
                                                 {/* NOTE: Change Advertise to Delist/Unpublish/withdraw */}
-                                                <button onClick={(e) => publishButtonHandler(e, service.id)} disabled={service.service_live}>Advertise</button>
+                                                <button
+                                                    className={service.service_live ? 'withdraw-button' : 'advertise-button'}
+                                                    onClick={(e) => publishButtonHandler(e, service.id)}
+                                                    // disabled={service.service_live}
+                                                >
+                                                    {service.service_live ? 'Withdraw' : 'Advertise'}
+                                                </button>
                                         </div>
                                     )}              
                             </div>

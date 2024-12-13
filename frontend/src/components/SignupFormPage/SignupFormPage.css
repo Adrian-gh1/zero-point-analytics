@@ -1,5 +1,18 @@
 /* frontend/src/components/SignupFormPage/SignupFormPage.css */
 
+.signup-page-container {
+    background-image: url('/images/BackgroundImages/image1.png');  /* Path to your background image */
+    background-size: cover; /* Ensures the image covers the entire container */
+    background-position: center center; /* Centers the image */
+    background-attachment: fixed; /* Keeps the background fixed when scrolling */
+    /* Ensures the background covers full viewport height */
+    /* min-height: 100vh;  */
+    height: calc(100vh - 70px);
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+}
+
 /* Container to center the signup form */
 .signup-form-container {
     display: flex;
@@ -7,6 +20,7 @@
     align-items: center;
     justify-content: center;
     max-width: 600px;
+    width: 100%;
     margin: 50px auto;
     padding: 20px;
     background-color: #f9f9f9; /* Light background */

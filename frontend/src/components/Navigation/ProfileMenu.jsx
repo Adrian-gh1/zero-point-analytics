@@ -4,10 +4,10 @@ import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { FaUser } from 'react-icons/fa';
+import { FaBars } from 'react-icons/fa';
 import { thunkGetUserBusiness } from '../../redux/businesses';
-import LoadingModal from '../LoadingModal';
 import { thunkLogout } from '../../redux/session';
+import LoadingModal from '../LoadingModal';
 import './ProfileMenu.css';
 
 function ProfileMenu() {
@@ -15,7 +15,6 @@ function ProfileMenu() {
     const navigate = useNavigate();
     const sessionUser = useSelector(state => state.session.user);
     const userBusiness = useSelector(state => state.businesses.userBusiness)        
-
 
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [loading, setLoading] = useState(false);
@@ -78,9 +77,9 @@ function ProfileMenu() {
 
     return (
         <div>
-            <button onClick={toggleMenu}>
-                <FaUser size={20} />
-            </button>
+            <div onClick={toggleMenu}>
+                <FaBars size={20} />
+            </div>
 
             {isMenuOpen && (
                 <div className="dropdown-menu" ref={profileRef}>

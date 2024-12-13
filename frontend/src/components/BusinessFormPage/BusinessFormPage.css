@@ -1,49 +1,106 @@
 /* frontend/src/components/BusinessFormPage/BusinessFormPage.css */
 
+.business-page-container {
+  background-image: url('/images/BackgroundImages/image1.png');  /* Path to your background image */
+  background-size: cover; /* Ensures the image covers the entire container */
+  background-position: center center; /* Centers the image */
+  background-attachment: fixed; /* Optional: makes the background fixed while scrolling */
+  /* Ensures the background covers the full height of the viewport */
+  /* min-height: 100vh; */
+  height: calc(100vh - 70px);
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+/* Container to center the business form */
 .business-form-container {
-    max-width: 600px;
-    margin: 0 auto;
-    padding: 20px;
-  }
-  
-  .business-form {
-    display: flex;
-    flex-direction: column;
-  }
-  
-  .form-group {
-    margin-bottom: 15px;
-  }
-  
-  label {
-    font-weight: bold;
-  }
-  
-  input, textarea {
-    width: 100%;
-    padding: 10px;
-    font-size: 16px;
-  }
-  
-  button {
-    padding: 10px 20px;
-    background-color: #4CAF50;
-    color: white;
-    border: none;
-    cursor: pointer;
-  }
-  
-  button:hover {
-    background-color: #45a049;
-  }
-  
-  .success-message {
-    color: green;
-    margin-bottom: 15px;
-  }
-  
-  .error-message {
-    color: red;
-    margin-bottom: 15px;
-  }
-  
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  max-width: 600px;
+  width: 100%;
+  margin: 50px auto;
+  padding: 20px;
+  background-color: #f9f9f9; /* Light background */
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Heading */
+.business-form-heading {
+  margin-bottom: 20px;
+  text-align: center;
+  font-size: 1.5rem;
+}
+
+/* Styling for the business form */
+.business-form {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+/* Grouping for each input */
+.business-form-group {
+  margin-bottom: 15px;
+  width: 100%;
+}
+
+/* Labels */
+.business-label {
+  font-size: 1rem;
+  margin-bottom: 5px;
+  display: block;
+  text-align: left;
+}
+
+/* Input fields */
+.business-input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 1rem;
+  outline: none;
+  box-sizing: border-box;
+}
+
+/* Styling for error messages */
+.business-error {
+  color: #d9534f;
+  font-size: 0.875rem;
+  margin-top: 5px;
+}
+
+/* Styling for the submit button */
+.business-submit-button {
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background-color 0.3s;
+  width: 100%; /* Full width */
+}
+
+/* Hover effect for the submit button */
+.business-submit-button:hover {
+  background-color: #0056b3;
+}
+
+/* Success message */
+.success-message {
+  color: green;
+  margin-bottom: 15px;
+}
+
+/* Error message */
+.error-message {
+  color: red;
+  margin-bottom: 15px;
+}

@@ -1,6 +1,6 @@
 // frontend/src/components/Navigation/Navigation.jsx
 
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import { FaBuilding } from 'react-icons/fa';
 import ProfileMenu from './ProfileMenu';
 import './Navigation.css';
@@ -15,16 +15,25 @@ function Navigation() {
     return (
         <div className="navbar">
 
-            <div className="logo" onClick={logoHandler}>
-                <FaBuilding /> Zero Point Analytics
+            <div className="left-navbar" onClick={logoHandler}>
+                <FaBuilding /> Zero Point
             </div>
 
             <div className="search-bar">
                 {/* <input type="text" placeholder="Search..." /> */}
             </div>
 
-            <div>
-                <ProfileMenu/>
+            <div className="right-navbar">
+                <Link to='/'>Home</Link>
+                {/* <Link to='/businessDirectory'>Businesses</Link> */}
+                <Link to='/serviceDirectory'>Services</Link>
+                {/* <Link to='/'>Marketing</Link> */}
+                {/* <Link to='/'>Home</Link> */}
+
+                <div className='right-navbar-pofile-menu'>
+                    <ProfileMenu/>
+                </div>
+
             </div>
             
         </div>

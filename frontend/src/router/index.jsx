@@ -7,6 +7,8 @@ import LoginFormPage from "../components/LoginFormPage/LoginFormPage";
 import SignupFormPage from "../components/SignupFormPage/SignupFormPage";
 import ServiceFormPage from "../components/ServiceFormPage/ServiceFormPage";
 import BusinessFormPage from "../components/BusinessFormPage/BusinessFormPage";
+import ServicesDirectoryPage from "../components/ServicesDirectoryPage/ServicesDirectoryPage";
+import BusinessDirectoryPage from "../components/BusinessDirectoryPage/BusinessDirectoryPage";
 import ServiceDetailsPage from "../components/ServiceDetailsPage";
 import BusinessPortfolioPage from "../components/BusinessPortfolioPage/BusinessPortfolioPage";
 
@@ -27,6 +29,22 @@ export const router = createBrowserRouter([
                 element: <SignupFormPage />
             },
             {
+                path: '/businessForm',
+                element: <BusinessFormPage />
+            },
+            {
+                path: '/serviceForm',
+                element: <ServiceFormPage />
+            },
+            {
+                path: '/serviceDirectory',
+                element: <ServicesDirectoryPage />
+            },
+            {
+                path: '/businessDirectory',
+                element: <BusinessDirectoryPage />
+            },
+            {
                 // path: '/business/:businessId',
                 // element: <BusinessDetailsPage />
 
@@ -40,14 +58,6 @@ export const router = createBrowserRouter([
             {
                 path: '/businessPortfolio',
                 element: <BusinessPortfolioPage />
-            },
-            {
-                path: '/serviceForm',
-                element: <ServiceFormPage />
-            },
-            {
-                path: '/businessForm',
-                element: <BusinessFormPage />
             },
             // {
             //     path: '/userProfile',

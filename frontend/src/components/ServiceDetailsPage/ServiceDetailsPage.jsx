@@ -23,6 +23,8 @@ function ServiceDetailsPage() {
     const [loadingState, setLoadingState] = useState(true);
     const [isButtonDisabled, setIsButtonDisabled] = useState(false);
 
+    const backgroundImage = '/images/BackgroundImages/image1.png';
+
     // useEffect(() => {
     //     if (serviceId) {
     //         dispatch(thunkGetService(serviceId));
@@ -100,7 +102,17 @@ function ServiceDetailsPage() {
     };
 
     return (
-        <div>
+        <div
+            className='business-comparison-page-container'
+            style={{
+                // backgroundImage: `url(${imagePaths[currentImageIndex]})`,
+                backgroundImage: `url(${backgroundImage})`,
+                backgroundSize: 'cover',
+                backgroundPosition: 'center',
+                // backgroundAttachment: 'fixed',
+                height: 'calc(100vh - 70px)',
+            }}
+        >
             <div className="business-comparison-container">
                 <div className="business-comparison">
                     <div className="business-column">

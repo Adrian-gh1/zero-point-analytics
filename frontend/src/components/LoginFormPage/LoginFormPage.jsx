@@ -62,58 +62,61 @@ function LoginFormPage() {
     }
 
     return (
-        <div className="login-form-container">
-            {/* NOTE: If  onSubmit fails to submit defaults to onClick*/}
+        <div className="login-page-container">
+            <div className="login-form-container">
+                {/* NOTE: If  onSubmit fails to submit defaults to onClick*/}
 
-            <form 
-                className="login-form" 
-                onSubmit={handleSubmit} 
-                // onClick={(e) => {
-                //     if (e.target !== e.currentTarget) {
-                //         handleSubmit(e);
-                //     }
-                // }}
-            >
-                <div className="login-input-group">
-                    <label htmlFor="email">Email:</label>
-                    <input 
-                        type="email" 
-                        id="email" 
-                        name="email" 
-                        value={email} 
-                        onChange={(e) => setEmail(e.target.value)} 
-                        required 
-                        className="login-input"
-                    />
-                    {errors?.email && <div className="login-error">{errors.email}</div>}
+                <form 
+                    className="login-form" 
+                    onSubmit={handleSubmit} 
+                    // onClick={(e) => {
+                    //     if (e.target !== e.currentTarget) {
+                    //         handleSubmit(e);
+                    //     }
+                    // }}
+                >
+                    <div className="login-input-group">
+                        <label htmlFor="email">Email</label>
+                        <input 
+                            type="email" 
+                            id="email" 
+                            name="email" 
+                            value={email} 
+                            onChange={(e) => setEmail(e.target.value)} 
+                            required 
+                            className="login-input"
+                        />
+                        {errors?.email && <div className="login-error">{errors.email}</div>}
+                    </div>
+                    
+                    <div className="login-input-group">
+                        <label htmlFor="password">Password</label>
+                        <input 
+                            type="password" 
+                            id="password" 
+                            name="password" 
+                            value={password} 
+                            onChange={(e) => setPassword(e.target.value)} 
+                            required 
+                            className="login-input"
+                        />
+                        {errors?.password && <div className="login-error">{errors.password}</div>}
+                    </div>
+
+                    <button type="submit" className="login-submit-button">Login</button>
+
+                </form>
+
+                <div className="demo-login-container">
+                    <button onClick={demoLoginHandler} className="demo-login-button">Demo Login</button>
                 </div>
-                
-                <div className="login-input-group">
-                    <label htmlFor="password">Password:</label>
-                    <input 
-                        type="password" 
-                        id="password" 
-                        name="password" 
-                        value={password} 
-                        onChange={(e) => setPassword(e.target.value)} 
-                        required 
-                        className="login-input"
-                    />
-                    {errors?.password && <div className="login-error">{errors.password}</div>}
+
+                <div className="login-footer">
+                    Don&apos;t have an account? 
+                    <Link to="/signup" className="signup-link">Signup</Link>
                 </div>
-
-                <button type="submit" className="login-submit-button">Login</button>
-
-            </form>
-
-            <div className="demo-login-container">
-                <button onClick={demoLoginHandler} className="demo-login-button">Demo Login</button>
             </div>
 
-            <div className="login-footer">
-                Don&apos;t have an account? 
-                <Link to="/signup" className="signup-link">Signup</Link>
-            </div>
         </div>
     )
 }
